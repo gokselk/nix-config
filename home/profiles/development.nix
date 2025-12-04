@@ -28,8 +28,6 @@
     python3
     nodejs
 
-    # Editors (terminal)
-    neovim
   ];
 
   # Direnv integration
