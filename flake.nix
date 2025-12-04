@@ -29,9 +29,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # Determinate Nix (optional, for enterprise features)
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, disko, home-manager, nixos-wsl, sops-nix, ... }@inputs:

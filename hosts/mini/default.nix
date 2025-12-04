@@ -9,7 +9,6 @@
 
     # Modules
     ../../modules/nixos/base
-    ../../modules/nixos/base/determinate.nix  # Determinate Nix
     ../../modules/nixos/networking/firewall.nix
     ../../modules/nixos/networking/tailscale.nix
     ../../modules/nixos/storage/zfs.nix
