@@ -23,7 +23,7 @@
 
   # ZFS requires a unique hostId
   # Generate with: head -c 8 /etc/machine-id
-  networking.hostId = "deadbeef";
+  networking.hostId = "962c5737";
 
   # System state version (do not change after install)
   system.stateVersion = "24.11";
