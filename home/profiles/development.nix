@@ -11,7 +11,6 @@
     kubectx       # Context/namespace switching
 
     # Infrastructure tools
-    terraform
     opentofu      # Open source Terraform fork
     ansible
 
