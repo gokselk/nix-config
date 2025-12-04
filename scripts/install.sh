@@ -69,7 +69,7 @@ echo ""
 nix run github:nix-community/nixos-anywhere -- \
     --flake "${FLAKE_DIR}#${HOST}" \
     --target-host "${TARGET}" \
-    --build-on-remote
+    --build-on remote
 
 echo ""
 echo -e "${GREEN}=== Installation Complete ===${NC}"
