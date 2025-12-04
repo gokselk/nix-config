@@ -26,6 +26,9 @@
     pciutils
     usbutils
     lsof
+
+    # Nix utilities
+    home-manager
   ];
 
   # Enable vim as default editor
