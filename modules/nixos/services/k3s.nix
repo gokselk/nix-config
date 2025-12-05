@@ -8,6 +8,7 @@
     extraFlags = toString [
       "--disable=traefik"              # Use your own ingress controller
       "--write-kubeconfig-mode=644"    # Make kubeconfig readable
+      "--flannel-iface=vmbr0"          # Use bridge interface for flannel
     ];
   };
 
