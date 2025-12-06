@@ -1,0 +1,20 @@
+---
+# Tailscale LoadBalancer Service for Coder
+# This creates a device in your tailnet: coder.taildd106.ts.net
+apiVersion: v1
+kind: Service
+metadata:
+  name: coder-tailscale
+  namespace: coder
+  annotations:
+    tailscale.com/hostname: "coder"
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  ports:
+    - name: https
+      port: 443
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: coder

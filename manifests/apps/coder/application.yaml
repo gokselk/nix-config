@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coder
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    # Source 1: Encrypted secrets + service via ksops
+    - repoURL: https://github.com/goksel/nix-config
+      targetRevision: HEAD
+      path: manifests/apps/coder
+    # Source 2: Coder Helm chart
+    - repoURL: https://helm.coder.com/v2
+      chart: coder
+      targetRevision: 2.18.0
+      helm:
+        valuesObject:
+          coder:
+            service:
+              type: ClusterIP
+
+            env:
+              - name: CODER_ACCESS_URL
+                value: "https://coder.taildd106.ts.net"
+              - name: CODER_WILDCARD_ACCESS_URL
+                value: "*.coder.taildd106.ts.net"
+              - name: CODER_PG_CONNECTION_URL
+                valueFrom:
+                  secretKeyRef:
+                    name: coder-db-url
+                    key: url
+              - name: CODER_TELEMETRY_ENABLE
+                value: "false"
+
+            resources:
+              requests:
+                cpu: "250m"
+                memory: "256Mi"
+              limits:
+                cpu: "2000m"
+                memory: "2Gi"
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: coder
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
