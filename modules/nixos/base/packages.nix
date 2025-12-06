@@ -29,6 +29,7 @@
 
     # Nix utilities
     home-manager
+    just        # Task runner (see Justfile)
   ];
 
   # Enable vim as default editor
