@@ -69,12 +69,13 @@ secrets-edit file:
 secrets-create template:
     #!/usr/bin/env bash
     set -euo pipefail
-    target="${{template}%.template}"
+    template="{{template}}"
+    target="${template%.template}"
     if [ -f "$target" ]; then
         echo "Error: $target already exists"
         exit 1
     fi
-    cp "{{template}}" "$target"
+    cp "$template" "$target"
     echo "Created $target - edit and encrypt with: just secrets-encrypt $target"
 
 # Encrypt a plaintext secret file
