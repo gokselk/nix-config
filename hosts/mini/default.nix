@@ -15,6 +15,7 @@
     ../../modules/nixos/services/ssh.nix
     ../../modules/nixos/services/incus.nix
     ../../modules/nixos/services/k3s.nix
+    ../../modules/nixos/secrets
   ];
 
   # Hostname

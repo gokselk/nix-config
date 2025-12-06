@@ -1,0 +1,31 @@
+# SOPS configuration
+# Uses SSH ed25519 keys converted to age format
+
+keys:
+  # goksel's SSH key (ssh-to-age -i ~/.ssh/id_ed25519.pub)
+  - &goksel age1kz7n7l8rgu3cpwf5wyyleslanjnavglgmstvlfqmshw424mvpfssy4sy3y
+
+  # mini's SSH host key - get with: ssh-keyscan -t ed25519 mini | ssh-to-age
+  # After reinstall: update this key and run `sops updatekeys` on all secrets
+  # - &mini age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+creation_rules:
+  # NixOS system secrets (encrypt to both user + host)
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *goksel
+          # - *mini
+
+  # Home-manager user secrets (user key only)
+  - path_regex: home/secrets/.*\.yaml$
+    key_groups:
+      - age:
+          - *goksel
+
+  # Kubernetes secrets (encrypt to both for ksops on server)
+  - path_regex: manifests/.*secret.*\.yaml$
+    key_groups:
+      - age:
+          - *goksel
+          # - *mini

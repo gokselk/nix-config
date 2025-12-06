@@ -9,9 +9,14 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, ... }@inputs:
     let
       # Helper to create home configurations
       mkHome = { username, system, hostname, extraModules ? [] }:
@@ -22,6 +27,7 @@
             pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
           };
           modules = [
+            sops-nix.homeManagerModules.sops
             ./profiles/base.nix
             ./users/${username}
           ] ++ extraModules;
