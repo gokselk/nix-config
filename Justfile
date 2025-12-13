@@ -102,9 +102,9 @@ secrets-encrypt file:
 secrets-decrypt file:
     sops -d {{file}}
 
-# Get host's age public key (run after NixOS rebuild)
+# Get host's age public key (derived from SSH host key)
 host-key host="mini":
-    ssh {{host}} "sudo cat /var/lib/sops-nix/key.txt" | grep "public key:" | cut -d: -f2 | tr -d ' '
+    ssh {{host}} "cat /etc/ssh/ssh_host_ed25519_key.pub" | ssh-to-age
 
 # --- Remote Deployment ---
 

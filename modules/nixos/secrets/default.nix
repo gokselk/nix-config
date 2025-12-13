@@ -7,15 +7,15 @@
     defaultSopsFile = ../../../secrets/secrets.yaml;
 
     age = {
-      # Generate dedicated age key (standard sops-nix approach)
-      # After rebuild, get public key with: just host-key
-      keyFile = "/var/lib/sops-nix/key.txt";
-      generateKey = true;
+      # Use SSH host key converted to age (solves chicken-egg problem)
+      # SSH host keys are auto-generated during NixOS installation
+      # Get age public key: ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     };
 
-    # Secrets defined here (uncomment when secrets.yaml exists)
-    # secrets = {
-    #   "tailscale/authkey" = {};
-    # };
+    # Define secrets to decrypt
+    secrets = {
+      "tailscale/authkey" = {};
+    };
   };
 }
