@@ -51,7 +51,23 @@ update-input input:
 outputs:
     nix flake show
 
-# --- Secrets (SOPS) ---
+# --- Secrets (SOPS + age) ---
+
+# Set up local age key from SSH key (one-time setup)
+age-setup:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p ~/.config/sops/age
+    if [ -f ~/.config/sops/age/keys.txt ]; then
+        echo "Age key already exists at ~/.config/sops/age/keys.txt"
+        grep "public key:" ~/.config/sops/age/keys.txt || true
+        exit 0
+    fi
+    ssh-to-age -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt
+    chmod 600 ~/.config/sops/age/keys.txt
+    echo "Created ~/.config/sops/age/keys.txt"
+    echo "Add this public key to .sops.yaml:"
+    ssh-to-age -i ~/.ssh/id_ed25519.pub
 
 # Re-encrypt all secrets with current keys in .sops.yaml
 secrets-update:
@@ -86,9 +102,9 @@ secrets-encrypt file:
 secrets-decrypt file:
     sops -d {{file}}
 
-# Get host key for .sops.yaml (run after reinstall)
+# Get host's age public key (run after NixOS rebuild)
 host-key host="mini":
-    ssh-keyscan -t ed25519 {{host}} | ssh-to-age
+    ssh {{host}} "sudo cat /var/lib/sops-nix/key.txt" | grep "public key:" | cut -d: -f2 | tr -d ' '
 
 # --- Remote Deployment ---
 

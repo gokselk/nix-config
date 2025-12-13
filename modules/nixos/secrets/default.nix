@@ -6,9 +6,11 @@
   sops = {
     defaultSopsFile = ../../../secrets/secrets.yaml;
 
-    # Use SSH host key directly - no separate key deployment needed
     age = {
-      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      # Generate dedicated age key (standard sops-nix approach)
+      # After rebuild, get public key with: just host-key
+      keyFile = "/var/lib/sops-nix/key.txt";
+      generateKey = true;
     };
 
     # Secrets defined here (uncomment when secrets.yaml exists)
@@ -16,17 +18,4 @@
     #   "tailscale/authkey" = {};
     # };
   };
-
-  # Ensure ed25519 host key exists
-  services.openssh.hostKeys = [
-    {
-      path = "/etc/ssh/ssh_host_ed25519_key";
-      type = "ed25519";
-    }
-    {
-      path = "/etc/ssh/ssh_host_rsa_key";
-      type = "rsa";
-      bits = 4096;
-    }
-  ];
 }
