@@ -5,6 +5,8 @@
     enable = true;
     # Enable subnet routing and exit node capability
     useRoutingFeatures = "server";
+    # Use authkey from sops-nix for automatic authentication
+    authKeyFile = config.sops.secrets."tailscale/authkey".path;
   };
 
   # Required for Tailscale exit node functionality
