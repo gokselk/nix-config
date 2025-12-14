@@ -39,21 +39,21 @@
   # Git configuration
   programs.git = {
     enable = true;
-    userName = "Goksel";
-    userEmail = "goksel@users.noreply.github.com";
-
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Goksel Kabadayi";
+        email = "gokselk.dev@gmail.com";
+      };
       init.defaultBranch = "main";
       pull.rebase = true;
       push.autoSetupRemote = true;
-    };
-
-    aliases = {
-      st = "status";
-      co = "checkout";
-      br = "branch";
-      ci = "commit";
-      lg = "log --oneline --graph --decorate";
+      alias = {
+        st = "status";
+        co = "checkout";
+        br = "branch";
+        ci = "commit";
+        lg = "log --oneline --graph --decorate";
+      };
     };
   };
 
