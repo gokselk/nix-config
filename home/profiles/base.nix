@@ -75,7 +75,8 @@
     yq-go
     tree
     bat
-    eza     # Modern ls replacement
+    eza        # Modern ls replacement
+    fastfetch  # System info display
 
     # Archives
     unzip
