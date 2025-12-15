@@ -1,59 +1,102 @@
 # Nix Home Lab Commands
 # Run `just` to see all available commands
 
-# Default: show help
-default:
-    @just --list
+set shell := ["bash", "-euo", "pipefail", "-c"]
+set positional-arguments
 
 # --- Variables ---
 hostname := `hostname`
 user := `whoami`
 
-# --- NixOS (Linux only) ---
+# Show all commands
+default:
+    @just --list --unsorted
 
-# Rebuild NixOS for current host
-rebuild:
-    sudo nixos-rebuild switch --flake .#{{hostname}}
+# ─── Private Helpers ──────────────────────────────
 
-# Rebuild NixOS for specific host
-rebuild-host host:
-    sudo nixos-rebuild switch --flake .#{{host}}
+[private]
+_info msg:
+    @echo -e "\033[1;34m==>\033[0m \033[1m{{msg}}\033[0m"
 
-# Test NixOS config without switching
-test:
-    sudo nixos-rebuild test --flake .#{{hostname}}
+[private]
+_warn msg:
+    @echo -e "\033[1;33m==>\033[0m \033[1m{{msg}}\033[0m"
 
-# Build NixOS config without activating
-build:
-    nixos-rebuild build --flake .#{{hostname}}
+# ─── NixOS ────────────────────────────────────────
 
-# --- Home Manager (all platforms) ---
+[group('nixos')]
+[doc('Rebuild NixOS (optionally specify host)')]
+rebuild host=hostname:
+    @just _info "Rebuilding NixOS for {{host}}"
+    nixos-rebuild switch --flake .#{{host}} --no-update-lock-file
 
-# Switch home-manager for current host
-home:
-    home-manager switch --flake ./home#{{user}}@{{hostname}}
+[group('nixos')]
+[doc('Test config without switching')]
+test host=hostname:
+    @just _info "Testing NixOS config for {{host}}"
+    nixos-rebuild test --flake .#{{host}} --no-update-lock-file
 
-# Switch home-manager for specific user@host
-home-switch target:
-    home-manager switch --flake ./home#{{target}}
+[group('nixos')]
+[doc('Build config without activating')]
+build host=hostname:
+    @just _info "Building NixOS config for {{host}}"
+    nixos-rebuild build --flake .#{{host}} --no-update-lock-file
 
-# --- Flake Management ---
+[group('nixos')]
+[doc('Dry-run showing what would change')]
+dry-run host=hostname:
+    @just _info "Dry-run for {{host}}"
+    nixos-rebuild dry-activate --flake .#{{host}} --no-update-lock-file
 
-# Update all flake inputs
-update:
-    nix flake update
+[group('nixos')]
+[doc('Rollback to previous generation')]
+[confirm('Roll back to previous generation?')]
+rollback:
+    @just _warn "Rolling back to previous generation"
+    nixos-rebuild switch --rollback
 
-# Update specific input
-update-input input:
+[group('nixos')]
+[doc('List NixOS generations')]
+generations:
+    nixos-rebuild list-generations
+
+# ─── Home Manager ─────────────────────────────────
+
+[group('home')]
+[doc('Switch home-manager (optionally specify user@host)')]
+home target=(user + "@" + hostname):
+    @just _info "Switching home-manager for {{target}}"
+    home-manager switch --flake ./home#{{target}} --no-update-lock-file
+
+# ─── Flake ────────────────────────────────────────
+
+[group('flake')]
+[doc('Update flake inputs (optionally specify input)')]
+update *input:
+    @just _info "Updating flake inputs{{ if input != '' { ': ' + input } else { '' } }}"
     nix flake update {{input}}
 
-# Show flake outputs
+[group('home')]
+[doc('Update home flake inputs (optionally specify input)')]
+home-update *input:
+    @just _info "Updating home flake inputs{{ if input != '' { ': ' + input } else { '' } }}"
+    nix flake update {{input}} --flake ./home
+
+[group('flake')]
+[doc('Show flake outputs')]
 outputs:
     nix flake show
 
-# --- Secrets (SOPS + age) ---
+[group('flake')]
+[doc('Check flake health')]
+check:
+    @just _info "Checking flake"
+    nix flake check
 
-# Set up local age key from SSH key (one-time setup)
+# ─── Secrets ──────────────────────────────────────
+
+[group('secrets')]
+[doc('Set up local age key from SSH key (one-time)')]
 age-setup:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -69,19 +112,21 @@ age-setup:
     echo "Add this public key to .sops.yaml:"
     ssh-to-age -i ~/.ssh/id_ed25519.pub
 
-# Re-encrypt all secrets with current keys in .sops.yaml
-secrets-update:
-    #!/usr/bin/env bash
-    set -euo pipefail
+[group('secrets')]
+[doc('Re-encrypt all secrets with current keys')]
+secrets-rekey:
+    @just _info "Re-encrypting secrets"
     find . -name "*.yaml" \( -path "*/secrets/*" -o -name "secret.enc.yaml" \) \
         ! -name "*.template" -type f \
         -exec sh -c 'echo "Updating: $1" && sops updatekeys -y "$1"' _ {} \;
 
-# Edit a secret file
+[group('secrets')]
+[doc('Edit a secret file')]
 secrets-edit file:
     sops {{file}}
 
-# Create secret from template
+[group('secrets')]
+[doc('Create secret from template')]
 secrets-create template:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -94,57 +139,102 @@ secrets-create template:
     cp "$template" "$target"
     echo "Created $target - edit and encrypt with: just secrets-encrypt $target"
 
-# Encrypt a plaintext secret file
+[group('secrets')]
+[doc('Encrypt a plaintext secret file')]
 secrets-encrypt file:
+    @just _info "Encrypting {{file}}"
     sops -e -i {{file}}
 
-# Decrypt a secret to stdout
+[group('secrets')]
+[doc('Decrypt a secret to stdout')]
 secrets-decrypt file:
     sops -d {{file}}
 
-# Get host's age public key (derived from SSH host key)
+[group('secrets')]
+[doc("Get host's age public key from SSH host key")]
 host-key host="mini":
     ssh {{host}} "cat /etc/ssh/ssh_host_ed25519_key.pub" | ssh-to-age
 
-# --- Remote Deployment ---
+# ─── Deploy ───────────────────────────────────────
 
-# Deploy to remote host via SSH
+[group('deploy')]
+[doc('Deploy to remote host via SSH')]
 deploy host:
+    @just _info "Deploying to {{host}}"
     nixos-rebuild switch --flake .#{{host}} --target-host {{host}} --use-remote-sudo
 
-# --- Kubernetes / ArgoCD ---
+# ─── Kubernetes / ArgoCD ──────────────────────────
 
-# Bootstrap ArgoCD (first-time setup)
-argocd-bootstrap:
+[group('k8s')]
+[doc('Bootstrap ArgoCD (first-time setup)')]
+argocd-setup:
+    @just _info "Bootstrapping ArgoCD"
     kubectl create namespace argocd || true
     kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
     kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=argocd-server -n argocd --timeout=300s
     kubectl apply -f manifests/argocd/app-of-apps.yaml
 
-# Get ArgoCD admin password
+[group('k8s')]
+[doc('Get ArgoCD admin password')]
 argocd-password:
     @kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
 
-# Port-forward ArgoCD UI
+[group('k8s')]
+[doc('Port-forward ArgoCD UI to localhost:8080')]
 argocd-ui:
+    @just _info "ArgoCD UI at https://localhost:8080"
     kubectl port-forward svc/argocd-server -n argocd 8080:443
 
-# --- Utilities ---
+# ─── ZFS ─────────────────────────────────────────
 
-# Check system status
+[group('zfs')]
+[doc('Show pool status')]
+zfs-status:
+    zpool status
+
+[group('zfs')]
+[doc('List datasets')]
+zfs-list:
+    zfs list
+
+[group('zfs')]
+[doc('List snapshots')]
+zfs-snapshots:
+    zfs list -t snapshot
+
+[group('zfs')]
+[doc('Create manual snapshot')]
+zfs-snapshot dataset:
+    @just _info "Creating snapshot of {{dataset}}"
+    zfs snapshot {{dataset}}@manual-$(date +%Y%m%d-%H%M%S)
+
+[group('zfs')]
+[doc('Start scrub')]
+zfs-scrub pool="rpool":
+    @just _info "Starting scrub on {{pool}}"
+    zpool scrub {{pool}}
+
+# ─── System ──────────────────────────────────────
+
+[group('system')]
+[doc('Check system status')]
 status:
-    @echo "=== Host: {{hostname}} ==="
-    @echo "=== NixOS Generation ==="
+    @just _info "Host: {{hostname}}"
+    @just _info "NixOS Generation"
     @nixos-rebuild list-generations 2>/dev/null | tail -5 || echo "Not NixOS"
     @echo ""
-    @echo "=== Flake Inputs ==="
+    @just _info "Flake Inputs"
     @nix flake metadata --json 2>/dev/null | jq -r '.locks.nodes | to_entries[] | select(.value.locked) | "\(.key): \(.value.locked.rev[:8] // "N/A")"' || echo "No flake.lock"
 
-# Garbage collect old generations
+[group('system')]
+[doc('Garbage collect old generations')]
+[confirm('Delete old generations and garbage collect?')]
 gc:
-    sudo nix-collect-garbage -d
+    @just _info "Garbage collecting"
     nix-collect-garbage -d
 
-# Optimize nix store
+[group('system')]
+[doc('Optimize nix store')]
 optimize:
-    sudo nix-store --optimize
+    @just _info "Optimizing nix store"
+    nix-store --optimize
