@@ -1,0 +1,51 @@
+# Hyprland compositor with uwsm session management
+{ config, lib, pkgs, ... }:
+{
+  # Hyprland with built-in uwsm integration (NixOS 24.11+)
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
+
+  # PAM for screen locking (hyprlock)
+  security.pam.services.hyprlock = {};
+
+  # Polkit for privilege escalation dialogs
+  security.polkit.enable = true;
+
+  # PipeWire audio
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # D-Bus
+  services.dbus.enable = true;
+
+  # XDG portals for Wayland apps
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    config.common.default = "*";
+  };
+
+  # Fonts
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+    ];
+    fontconfig.defaultFonts = {
+      monospace = [ "JetBrainsMono Nerd Font" ];
+      sansSerif = [ "Noto Sans" ];
+      serif = [ "Noto Serif" ];
+    };
+  };
+}

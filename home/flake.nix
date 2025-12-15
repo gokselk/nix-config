@@ -40,7 +40,10 @@
           username = "goksel";
           system = "x86_64-linux";
           hostname = "mini";
-          extraModules = [ ./profiles/development.nix ];
+          extraModules = [
+            ./profiles/development.nix
+            ./profiles/hyprland.nix
+          ];
         };
 
         # NixOS WSL
