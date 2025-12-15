@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istiod
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/goksel/nix-config
+      targetRevision: HEAD
+      path: manifests/apps/istiod
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      chart: istiod
+      targetRevision: 1.24.2
+      helm:
+        valuesObject:
+          global:
+            platform: k3s
+          pilot:
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                cpu: 500m
+                memory: 512Mi
+            env:
+              PILOT_ENABLE_AMBIENT: "true"
+          meshConfig:
+            enablePrometheusMerge: true
+            accessLogFile: /dev/stdout
+            accessLogEncoding: JSON
+            defaultConfig:
+              proxyMetadata:
+                ISTIO_META_DNS_CAPTURE: "true"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

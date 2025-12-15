@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-cni
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/goksel/nix-config
+      targetRevision: HEAD
+      path: manifests/apps/istio-cni
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      chart: cni
+      targetRevision: 1.24.2
+      helm:
+        valuesObject:
+          global:
+            platform: k3s
+          cni:
+            # k3s CNI paths
+            cniBinDir: /var/lib/rancher/k3s/data/current/bin
+            cniConfDir: /var/lib/rancher/k3s/agent/etc/cni/net.d
+            ambient:
+              enabled: true
+            resources:
+              requests:
+                cpu: 10m
+                memory: 64Mi
+              limits:
+                cpu: 100m
+                memory: 128Mi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
