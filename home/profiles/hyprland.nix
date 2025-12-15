@@ -160,7 +160,7 @@
   # Application launcher: rofi (wayland)
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     terminal = "${pkgs.ghostty}/bin/ghostty";
     theme = let
       inherit (config.lib.formats.rasi) mkLiteral;
