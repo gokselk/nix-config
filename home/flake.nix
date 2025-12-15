@@ -14,9 +14,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, catppuccin, ... }@inputs:
     let
       # Helper to create home configurations
       mkHome = { username, system, hostname, extraModules ? [] }:
@@ -28,6 +30,7 @@
           };
           modules = [
             sops-nix.homeManagerModules.sops
+            catppuccin.homeModules.catppuccin
             ./profiles/base.nix
             ./users/${username}
           ] ++ extraModules;
