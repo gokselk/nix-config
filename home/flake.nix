@@ -15,7 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, catppuccin, ... }@inputs:
@@ -65,13 +68,6 @@
           extraModules = [ ./profiles/development.nix ];
         };
 
-        # macOS (Intel)
-        "goksel@macbook-intel" = mkHome {
-          username = "goksel";
-          system = "x86_64-darwin";
-          hostname = "macbook";
-          extraModules = [ ./profiles/development.nix ];
-        };
       };
     };
 }

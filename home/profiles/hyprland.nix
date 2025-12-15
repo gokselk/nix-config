@@ -8,8 +8,8 @@
     systemd.enable = false;  # uwsm manages systemd integration
 
     settings = {
-      # Monitor configuration (auto-detect)
-      monitor = [ ",preferred,auto,1" ];
+      # Monitor configuration - highrr prefers highest refresh rate, auto scale for 4K
+      monitor = [ ",highrr,auto,auto" ];
 
       # General settings
       general = {
@@ -134,7 +134,10 @@
 
       # Environment variables for Wayland
       env = [
-        "XCURSOR_SIZE,24"
+        "XCURSOR_SIZE,32"
+        "XCURSOR_THEME,catppuccin-mocha-dark-cursors"
+        "HYPRCURSOR_SIZE,32"
+        "HYPRCURSOR_THEME,catppuccin-mocha-dark-cursors"
         "QT_QPA_PLATFORM,wayland"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "GDK_BACKEND,wayland,x11"
@@ -397,6 +400,14 @@
     wlr-randr
     wev
   ];
+
+  # Cursor theme (ensures GTK/Qt apps use it too)
+  home.pointerCursor = {
+    name = "catppuccin-mocha-dark-cursors";
+    package = pkgs.catppuccin-cursors.mochaDark;
+    size = 32;
+    gtk.enable = true;
+  };
 
   # XDG user directories
   xdg = {
