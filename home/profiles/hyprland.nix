@@ -151,11 +151,14 @@
     settings = {
       font-family = "JetBrainsMono Nerd Font";
       font-size = 11;
-      theme = "catppuccin-mocha";
       window-padding-x = 10;
       window-padding-y = 10;
     };
   };
+
+  # Catppuccin theming
+  catppuccin.flavor = "mocha";
+  catppuccin.ghostty.enable = true;
 
   # Application launcher: rofi (wayland)
   programs.rofi = {
