@@ -64,6 +64,14 @@
     enableBashIntegration = true;
   };
 
+  # Environment variables
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    PAGER = "less";
+    MANPAGER = "nvim +Man!";
+  };
+
   # Common packages
   home.packages = with pkgs; [
     # Core utilities

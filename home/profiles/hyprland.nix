@@ -114,9 +114,9 @@
         "$mod, mouse_down, workspace, e+1"
         "$mod, mouse_up, workspace, e-1"
 
-        # Screenshots
-        ", Print, exec, grim -g \"$(slurp)\" - | wl-copy"
-        "SHIFT, Print, exec, grim - | wl-copy"
+        # Screenshots (with satty annotation)
+        ", Print, exec, grim -g \"$(slurp)\" - | satty -f -"
+        "SHIFT, Print, exec, grim - | satty -f -"
       ];
 
       # Mouse bindings
@@ -134,10 +134,8 @@
 
       # Environment variables for Wayland
       env = [
-        "XCURSOR_SIZE,32"
-        "XCURSOR_THEME,catppuccin-mocha-dark-cursors"
-        "HYPRCURSOR_SIZE,32"
-        "HYPRCURSOR_THEME,catppuccin-mocha-dark-cursors"
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
         "QT_QPA_PLATFORM,wayland"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "GDK_BACKEND,wayland,x11"
@@ -160,8 +158,30 @@
   };
 
   # Catppuccin theming
-  catppuccin.flavor = "mocha";
-  catppuccin.ghostty.enable = true;
+  catppuccin = {
+    flavor = "mocha";
+    accent = "blue";
+    ghostty.enable = true;
+    gtk.enable = true;
+    gtk.icon.enable = true;
+    kvantum.enable = true;
+  };
+
+  # GTK settings
+  gtk = {
+    enable = true;
+    font = {
+      name = "Inter";
+      size = 11;
+    };
+  };
+
+  # Qt theming (match GTK)
+  qt = {
+    enable = true;
+    platformTheme.name = "kvantum";
+    style.name = "kvantum";
+  };
 
   # Application launcher: rofi (wayland)
   programs.rofi = {
@@ -380,7 +400,7 @@
     # Screenshot tools
     grim
     slurp
-    swappy
+    satty
 
     # Clipboard
     wl-clipboard
@@ -399,14 +419,68 @@
     # Misc Wayland tools
     wlr-randr
     wev
+
+    # Browser
+    brave
+
+    # Editor
+    vscode-fhs
+
+    # Media
+    vlc
+    spotify
+
+    # Communication
+    vesktop
+    telegram-desktop
+
+    # Documents
+    typst
+    typst-lsp
+
+    # Productivity
+    obsidian
+
+    # Screen recording/streaming
+    obs-studio
+
+    # Media streaming
+    stremio
+
+    # Fonts
+    corefonts      # Arial, Times New Roman, Courier New, etc.
+    vistafonts     # Calibri, Cambria, Consolas, etc.
+    inter          # Modern UI font
+
+    # Theming
+    libsForQt5.qtstyleplugin-kvantum
+    kdePackages.qtstyleplugin-kvantum
+    catppuccin-kvantum
+
+    # Utilities
+    qbittorrent
+    bitwarden-desktop
+
+    # KDE apps
+    kdePackages.okular      # PDF/document viewer
+    kdePackages.dolphin     # File manager
+    kdePackages.gwenview    # Image viewer
+    kdePackages.ark         # Archive manager
   ];
 
-  # Cursor theme (ensures GTK/Qt apps use it too)
+  # Desktop environment variables
+  home.sessionVariables = {
+    BROWSER = "brave";
+    TERMINAL = "ghostty";
+  };
+
+  # Cursor theme
   home.pointerCursor = {
     name = "catppuccin-mocha-dark-cursors";
     package = pkgs.catppuccin-cursors.mochaDark;
-    size = 32;
+    size = 24;
     gtk.enable = true;
+    hyprcursor.enable = true;
   };
 
   # XDG user directories
@@ -416,5 +490,26 @@
       enable = true;
       createDirectories = true;
     };
+  };
+
+  # mpv with gpu-next, vulkan, hq profile
+  programs.mpv = {
+    enable = true;
+    config = {
+      profile = "high-quality";
+      vo = "gpu-next";
+      gpu-api = "vulkan";
+      hwdec = "vulkan";
+    };
+  };
+
+  # Brave debloat policies
+  xdg.configFile."BraveSoftware/Brave-Browser/policies/managed/policies.json".text = builtins.toJSON {
+    BraveRewardsDisabled = true;
+    BraveWalletDisabled = true;
+    BraveNewsEnabled = false;
+    BraveLeoAssistantEnabled = false;
+    BraveVPNDisabled = true;
+    MetricsReportingEnabled = false;
   };
 }

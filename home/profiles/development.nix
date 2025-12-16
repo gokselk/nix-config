@@ -21,13 +21,52 @@
     # Development tools
     direnv
     lazygit       # Terminal UI for git
+    lazydocker    # Terminal UI for docker
     gh            # GitHub CLI
+    delta         # Better git diffs
+    httpie        # HTTP client
+    usql          # Universal SQL client
+    tokei         # Code statistics
 
     # Languages (add as needed)
     go
+    gopls           # Go LSP
+    golangci-lint   # Go linter
+    delve           # Go debugger
     python3
+    uv              # Fast Python package manager
+    ruff            # Fast Python linter/formatter
+    pyright         # Python type checker
     nodejs
+    yarn
 
+    # Rust
+    rustup
+
+    # C/C++
+    clang
+    llvm
+    clang-tools     # clangd, clang-format, clang-tidy
+    lld             # LLVM linker
+    lldb            # LLVM debugger
+    gdb             # GNU debugger
+    valgrind        # Memory debugging
+
+    # Build tools
+    cmake
+    ninja
+    meson
+    gnumake
+
+    # Formatters
+    prettier
+    shfmt
+
+    # File manager
+    yazi
+
+    # Media tools
+    yt-dlp
   ];
 
   # Direnv integration
@@ -39,6 +78,20 @@
 
   # Lazygit
   programs.lazygit.enable = true;
+
+  # Zoxide (smarter cd)
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
+  # Atuin (shell history)
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
 
   # GitHub CLI
   programs.gh = {
@@ -59,21 +112,10 @@
   # Tmux for terminal multiplexing
   programs.tmux = {
     enable = true;
-    terminal = "tmux-256color";
-    historyLimit = 10000;
     keyMode = "vi";
     prefix = "C-a";
-
-    extraConfig = ''
-      # Enable mouse support
-      set -g mouse on
-
-      # Start windows and panes at 1, not 0
-      set -g base-index 1
-      setw -g pane-base-index 1
-
-      # Renumber windows when one is closed
-      set -g renumber-windows on
-    '';
+    baseIndex = 1;
+    mouse = true;
+    escapeTime = 10;
   };
 }
