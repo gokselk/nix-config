@@ -162,8 +162,6 @@
     flavor = "mocha";
     accent = "blue";
     ghostty.enable = true;
-    gtk.enable = true;
-    gtk.icon.enable = true;
     kvantum.enable = true;
   };
 
