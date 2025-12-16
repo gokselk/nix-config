@@ -443,7 +443,7 @@
     obs-studio
 
     # Media streaming
-    stremio
+    # stremio  # Disabled - likely pulls in Qt5 WebEngine
 
     # Fonts
     corefonts      # Arial, Times New Roman, Courier New, etc.
