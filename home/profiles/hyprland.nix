@@ -451,7 +451,6 @@
     inter          # Modern UI font
 
     # Theming
-    libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
     catppuccin-kvantum
 
