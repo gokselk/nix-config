@@ -2,11 +2,10 @@
   description = "Home Manager configuration (standalone)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -17,11 +16,11 @@
 
     catppuccin = {
       url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, sops-nix, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, sops-nix, catppuccin, ... }@inputs:
     let
       # Helper to create home configurations
       mkHome = { username, system, hostname, extraModules ? [] }:
@@ -29,7 +28,6 @@
           pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = {
             inherit inputs;
-            pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
           };
           modules = [
             sops-nix.homeManagerModules.sops
