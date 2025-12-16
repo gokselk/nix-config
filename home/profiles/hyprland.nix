@@ -434,7 +434,7 @@
 
     # Documents
     typst
-    typst-lsp
+    tinymist        # Typst LSP
 
     # Productivity
     obsidian
