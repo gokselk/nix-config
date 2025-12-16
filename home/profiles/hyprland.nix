@@ -174,11 +174,11 @@
     };
   };
 
-  # Qt theming (match GTK via qt5ct/qt6ct)
+  # Qt theming (use Breeze to avoid Qt5 dependencies)
   qt = {
     enable = true;
-    platformTheme.name = "qtct";
-    style.name = "kvantum";  # Uses Qt6 Kvantum from kdePackages
+    platformTheme.name = "kde";
+    style.name = "breeze";
   };
 
   # Application launcher: rofi (wayland)
@@ -450,11 +450,8 @@
     vista-fonts    # Calibri, Cambria, Consolas, etc.
     inter          # Modern UI font
 
-    # Theming (Qt6 Kvantum only, Qt5 is insecure)
-    kdePackages.qtstyleplugin-kvantum
-
     # Utilities
-    qbittorrent
+    qbittorrent-enhanced
     bitwarden-desktop
 
     # KDE apps
