@@ -447,7 +447,7 @@
 
     # Fonts
     corefonts      # Arial, Times New Roman, Courier New, etc.
-    vistafonts     # Calibri, Cambria, Consolas, etc.
+    vista-fonts    # Calibri, Cambria, Consolas, etc.
     inter          # Modern UI font
 
     # Theming
