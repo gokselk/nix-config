@@ -31,14 +31,6 @@ rebuild host=hostname:
     nixos-rebuild switch --flake .#{{host}} --no-update-lock-file
 
 [group('nixos')]
-[doc('Rebuild NixOS + home-manager together')]
-full host=hostname:
-    @just _info "Full rebuild for {{host}}"
-    nixos-rebuild switch --flake .#{{host}} --no-update-lock-file
-    @just _info "Switching home-manager for {{user}}@{{host}}"
-    home-manager switch --flake ./home#{{user}}@{{host}} --no-update-lock-file
-
-[group('nixos')]
 [doc('Test config without switching')]
 test host=hostname:
     @just _info "Testing NixOS config for {{host}}"
