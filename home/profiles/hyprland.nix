@@ -162,7 +162,7 @@
     flavor = "mocha";
     accent = "blue";
     ghostty.enable = true;
-    kvantum.enable = true;
+    # kvantum.enable = true;  # Disabled - Qt5 WebEngine is insecure
   };
 
   # GTK settings
@@ -174,11 +174,11 @@
     };
   };
 
-  # Qt theming (match GTK)
+  # Qt theming (match GTK via qt5ct/qt6ct)
   qt = {
     enable = true;
-    platformTheme.name = "kvantum";
-    style.name = "kvantum";
+    platformTheme.name = "qtct";
+    style.name = "kvantum";  # Uses Qt6 Kvantum from kdePackages
   };
 
   # Application launcher: rofi (wayland)
@@ -450,9 +450,8 @@
     vista-fonts    # Calibri, Cambria, Consolas, etc.
     inter          # Modern UI font
 
-    # Theming
+    # Theming (Qt6 Kvantum only, Qt5 is insecure)
     kdePackages.qtstyleplugin-kvantum
-    catppuccin-kvantum
 
     # Utilities
     qbittorrent
