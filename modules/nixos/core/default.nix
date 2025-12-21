@@ -1,8 +1,8 @@
-# Base NixOS configuration module
+# Core NixOS configuration module
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./nix-settings.nix
+    ./nix.nix
     ./packages.nix
     ./boot.nix
   ];

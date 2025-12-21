@@ -2,71 +2,19 @@
 # Tools for software development and DevOps
 { config, pkgs, lib, ... }:
 {
+  imports = [
+    ./kubernetes.nix
+    ./cloud.nix
+    ./languages.nix
+  ];
+
   home.packages = with pkgs; [
-    # Container/Kubernetes tools
-    kubectl
-    kubernetes-helm
-    k9s
-    stern         # Multi-pod log tailing
-    kubectx       # Context/namespace switching
-
-    # Infrastructure tools
-    opentofu      # Open source Terraform fork
-    ansible
-
-    # Cloud CLIs
-    awscli2
-    google-cloud-sdk
-
-    # Development tools
-    direnv
-    lazygit       # Terminal UI for git
+    # Development utilities
     lazydocker    # Terminal UI for docker
-    gh            # GitHub CLI
     delta         # Better git diffs
     httpie        # HTTP client
     usql          # Universal SQL client
     tokei         # Code statistics
-
-    # Languages (add as needed)
-    go
-    gopls           # Go LSP
-    golangci-lint   # Go linter
-    delve           # Go debugger
-    python3
-    uv              # Fast Python package manager
-    ruff            # Fast Python linter/formatter
-    pyright         # Python type checker
-    nodejs
-    yarn
-
-    # Rust
-    rustup
-
-    # C/C++
-    clang
-    llvm
-    clang-tools     # clangd, clang-format, clang-tidy
-    lld             # LLVM linker
-    lldb            # LLVM debugger
-    gdb             # GNU debugger
-    valgrind        # Memory debugging
-
-    # Build tools
-    cmake
-    ninja
-    meson
-    gnumake
-
-    # Formatters
-    prettier
-    shfmt
-
-    # File manager
-    yazi
-
-    # Media tools
-    yt-dlp
   ];
 
   # Direnv integration

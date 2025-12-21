@@ -4,6 +4,7 @@
   imports = [
     ./firewall.nix
     ./tailscale.nix
+    ./ssh.nix
   ];
 
   # Use NetworkManager for network management

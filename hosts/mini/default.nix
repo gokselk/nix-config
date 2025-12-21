@@ -8,13 +8,13 @@
     ./networking.nix  # Host-specific: static IP + bridge
 
     # Modules
-    ../../modules/nixos/base
+    ../../modules/nixos/core
     ../../modules/nixos/networking/firewall.nix
     ../../modules/nixos/networking/tailscale.nix
+    ../../modules/nixos/networking/ssh.nix
     ../../modules/nixos/storage/zfs.nix
-    ../../modules/nixos/services/ssh.nix
-    ../../modules/nixos/services/incus.nix
-    ../../modules/nixos/services/k3s.nix
+    ../../modules/nixos/virtualization/incus.nix
+    ../../modules/nixos/kubernetes/k3s.nix
     ../../modules/nixos/secrets
     ../../modules/nixos/desktop
   ];

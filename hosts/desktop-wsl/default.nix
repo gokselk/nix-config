@@ -2,9 +2,9 @@
 { config, lib, pkgs, inputs, ... }:
 {
   imports = [
-    # Only import nix-settings and packages for WSL (no boot config)
-    ../../modules/nixos/base/nix-settings.nix
-    ../../modules/nixos/base/packages.nix
+    # Only import nix and packages for WSL (no boot config)
+    ../../modules/nixos/core/nix.nix
+    ../../modules/nixos/core/packages.nix
   ];
 
   # WSL-specific configuration

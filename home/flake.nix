@@ -35,7 +35,9 @@
           modules = [
             sops-nix.homeManagerModules.sops
             catppuccin.homeModules.catppuccin
-            ./profiles/base.nix
+            ./profiles/core
+            ./profiles/shell
+            ./profiles/cli
             ./users/${username}
           ] ++ extraModules;
         };
@@ -48,8 +50,8 @@
           system = "x86_64-linux";
           hostname = "mini";
           extraModules = [
-            ./profiles/development.nix
-            ./profiles/hyprland.nix
+            ./profiles/development
+            ./profiles/hyprland
           ];
         };
 
@@ -58,7 +60,9 @@
           username = "goksel";
           system = "x86_64-linux";
           hostname = "desktop-wsl";
-          extraModules = [ ./profiles/development.nix ];
+          extraModules = [
+            ./profiles/development
+          ];
         };
 
         # macOS (Apple Silicon)
@@ -66,7 +70,9 @@
           username = "goksel";
           system = "aarch64-darwin";
           hostname = "macbook";
-          extraModules = [ ./profiles/development.nix ];
+          extraModules = [
+            ./profiles/development
+          ];
         };
 
       };
