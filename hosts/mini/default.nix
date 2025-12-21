@@ -3,18 +3,19 @@
 { config, lib, pkgs, inputs, ... }:
 {
   imports = [
+    # Host-specific
     ./disk-config.nix
     ./hardware.nix
-    ./networking.nix  # Host-specific: static IP + bridge
+    ./networking.nix
+    ./k3s.nix
+    ./incus.nix
 
-    # Modules
+    # Common modules
     ../../modules/nixos/core
     ../../modules/nixos/networking/firewall.nix
-    ../../modules/nixos/networking/tailscale.nix
     ../../modules/nixos/networking/ssh.nix
-    ../../modules/nixos/storage/zfs.nix
-    ../../modules/nixos/virtualization/incus.nix
-    ../../modules/nixos/kubernetes/k3s.nix
+    ../../modules/nixos/networking/tailscale.nix
+    ../../modules/nixos/storage
     ../../modules/nixos/secrets
     ../../modules/nixos/desktop
   ];

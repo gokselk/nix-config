@@ -1,5 +1,5 @@
 # Tailscale VPN configuration
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   services.tailscale = {
     enable = true;

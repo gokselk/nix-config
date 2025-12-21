@@ -1,4 +1,5 @@
 # Essential system packages
+# User CLI tools (htop, ripgrep, jq, etc) are in home-manager
 { config, lib, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
@@ -7,22 +8,13 @@
     git
     curl
     wget
-    htop
-    btop
 
-    # File utilities
-    tree
-    ripgrep
-    fd
-    jq
-    yq-go
-
-    # Network utilities
+    # Network diagnostics (may need root)
     dig
     nmap
     tcpdump
 
-    # System utilities
+    # Hardware diagnostics
     pciutils
     usbutils
     lsof

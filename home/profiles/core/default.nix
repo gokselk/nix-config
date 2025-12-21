@@ -19,4 +19,13 @@
     PAGER = "less";
     MANPAGER = "nvim +Man!";
   };
+
+  # XDG directories
+  xdg = {
+    enable = true;
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+  };
 }

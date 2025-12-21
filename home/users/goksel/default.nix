@@ -15,7 +15,4 @@
 
   # User-specific git config (if different from base)
   # programs.git.userEmail = "different@email.com";
-
-  # XDG directories (Linux only)
-  xdg.enable = pkgs.stdenv.isLinux;
 }

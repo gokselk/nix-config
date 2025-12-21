@@ -73,15 +73,6 @@
     TERMINAL = "ghostty";
   };
 
-  # XDG user directories
-  xdg = {
-    enable = true;
-    userDirs = {
-      enable = true;
-      createDirectories = true;
-    };
-  };
-
   # mpv with gpu-next, vulkan, hq profile
   programs.mpv = {
     enable = true;

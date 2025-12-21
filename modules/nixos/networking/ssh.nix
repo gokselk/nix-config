@@ -1,5 +1,5 @@
 # OpenSSH configuration
-{ config, lib, pkgs, ... }:
+{ ... }:
 {
   services.openssh = {
     enable = true;

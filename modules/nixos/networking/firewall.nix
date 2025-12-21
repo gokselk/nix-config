@@ -1,6 +1,9 @@
 # Firewall configuration
-{ config, lib, pkgs, ... }:
+{ ... }:
 {
+  # Use nftables (modern firewall backend)
+  networking.nftables.enable = true;
+
   networking.firewall = {
     enable = true;
 

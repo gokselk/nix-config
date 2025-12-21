@@ -1,5 +1,5 @@
 # K3s Kubernetes configuration
-{ config, lib, pkgs, ... }:
+{ lib, ... }:
 {
   services.k3s = {
     enable = true;
@@ -20,13 +20,8 @@
   # Kubernetes requires swap to be disabled
   swapDevices = lib.mkForce [];
 
-  # Kubernetes tools
-  environment.systemPackages = with pkgs; [
-    kubectl
-    kubernetes-helm
-    k9s        # Terminal UI for Kubernetes
-    stern      # Multi-pod log tailing
-  ];
+  # CLI tools (kubectl, k9s, stern, helm) are in home-manager
+  # See: home/profiles/development/kubernetes.nix
 
   # Set KUBECONFIG for convenience
   environment.variables.KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";

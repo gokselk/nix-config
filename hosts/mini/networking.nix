@@ -1,8 +1,7 @@
 # Network configuration for mini
 # Bridge for VM/container networking
-{ config, lib, pkgs, ... }:
+{ ... }:
 {
-  networking.networkmanager.enable = false;
   networking.useDHCP = false;
 
   # Bridge with physical NIC - inherits MAC from eno1 automatically

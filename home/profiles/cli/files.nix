@@ -1,5 +1,5 @@
 # File management CLI tools
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     yazi      # Terminal file manager
