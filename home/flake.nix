@@ -65,16 +65,16 @@
           ];
         };
 
-        # macOS (Apple Silicon)
-        "goksel@macbook" = mkHome {
+        # macOS - Personal MacBook Air M2
+        "goksel@goksel-air" = mkHome {
           username = "goksel";
           system = "aarch64-darwin";
-          hostname = "macbook";
+          hostname = "goksel-air";
           extraModules = [
             ./profiles/development
+            ./profiles/darwin
           ];
         };
-
       };
     };
 }

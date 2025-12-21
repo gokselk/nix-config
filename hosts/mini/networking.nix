@@ -1,6 +1,6 @@
 # Network configuration for mini
 # Bridge for VM/container networking
-{ ... }:
+_:
 {
   networking.useDHCP = false;
 

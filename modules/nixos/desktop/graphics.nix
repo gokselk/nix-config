@@ -1,6 +1,6 @@
 # AMD GPU configuration for Wayland
 # Ryzen 6800H with RDNA2 integrated graphics
-{ ... }:
+_:
 {
   # OpenGL/Vulkan support
   hardware.graphics = {

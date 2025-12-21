@@ -1,5 +1,5 @@
 # NetworkManager configuration (for desktops)
-{ ... }:
+_:
 {
   networking.networkmanager.enable = true;
 

@@ -60,6 +60,34 @@ rollback:
 generations:
     nixos-rebuild list-generations
 
+# ─── Darwin (macOS) ────────────────────────────────
+
+[group('darwin')]
+[doc('Rebuild Darwin (optionally specify host)')]
+darwin host=hostname:
+    @just _info "Rebuilding Darwin for {{host}}"
+    darwin-rebuild switch --flake .#{{host}}
+
+[group('darwin')]
+[doc('Build Darwin config without activating')]
+darwin-build host=hostname:
+    @just _info "Building Darwin config for {{host}}"
+    darwin-rebuild build --flake .#{{host}}
+
+[group('darwin')]
+[doc('Check Darwin config')]
+darwin-check host=hostname:
+    @just _info "Checking Darwin config for {{host}}"
+    darwin-rebuild check --flake .#{{host}}
+
+[group('darwin')]
+[doc('Bootstrap nix-darwin on a new Mac')]
+darwin-bootstrap host=hostname:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "Installing nix-darwin for {{host}}..."
+    nix run nix-darwin -- switch --flake .#{{host}}
+
 # ─── Home Manager ─────────────────────────────────
 
 [group('home')]

@@ -17,6 +17,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # nix-darwin for macOS
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # WSL support (future)
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
@@ -36,7 +42,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, nixos-wsl, sops-nix, ... }@inputs:
+  outputs = { self, nixpkgs, disko, home-manager, nix-darwin, nixos-wsl, sops-nix, catppuccin, ... }@inputs:
     let
       # Helper function to create NixOS configurations
       mkHost = { hostname, system ? "x86_64-linux", extraModules ? [] }:
@@ -49,6 +55,37 @@
           modules = [
             disko.nixosModules.disko
             ./hosts/common
+            ./hosts/${hostname}
+          ] ++ extraModules;
+        };
+
+      # Helper function to create Darwin (macOS) configurations
+      mkDarwin = { hostname, system ? "aarch64-darwin", extraModules ? [] }:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            inherit (self) outputs;
+          };
+          modules = [
+            # Home-manager as darwin module
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.sharedModules = [
+                sops-nix.homeManagerModules.sops
+                catppuccin.homeModules.catppuccin
+              ];
+            }
+            # Common darwin config
+            ./hosts/common/darwin.nix
+            # Darwin modules
+            ./modules/darwin/core
+            ./modules/darwin/system
+            ./modules/darwin/homebrew
+            # Host-specific config
             ./hosts/${hostname}
           ] ++ extraModules;
         };
@@ -66,6 +103,14 @@
           hostname = "desktop-wsl";
           system = "x86_64-linux";
           extraModules = [ nixos-wsl.nixosModules.wsl ];
+        };
+      };
+
+      darwinConfigurations = {
+        # Personal MacBook Air M2
+        goksel-air = mkDarwin {
+          hostname = "goksel-air";
+          system = "aarch64-darwin";
         };
       };
 

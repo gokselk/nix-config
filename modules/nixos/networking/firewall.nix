@@ -1,5 +1,5 @@
 # Firewall configuration
-{ ... }:
+_:
 {
   # Use nftables (modern firewall backend)
   networking.nftables.enable = true;
