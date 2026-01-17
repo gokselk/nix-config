@@ -52,18 +52,3 @@ Windows Registry Editor Version 5.00
 
 ; Disable autoplay
 "AutoplayAllowed"=dword:00000000
-
-; Force-install extensions
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist]
-"1"="ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
-"2"="eimadpbcbfnmbkopoojfekhnkhdbieeh;https://clients2.google.com/service/update2/crx"
-"3"="nngceckbapebfimnlniiiahkandclblb;https://clients2.google.com/service/update2/crx"
-"4"="mnjggcdmjocbbbhaepdhchncahnbgone;https://clients2.google.com/service/update2/crx"
-"5"="gebbhagfogifgggkldgodflihgfeippi;https://clients2.google.com/service/update2/crx"
-"6"="hkligngkgcpcolhcnkgccglchdafcnao;https://clients2.google.com/service/update2/crx"
-"7"="cnojnbdhbhnkbcieeekonklommdnndci;https://clients2.google.com/service/update2/crx"
-"8"="hlepfoohegkhhmjieoechaddaejaokhf;https://clients2.google.com/service/update2/crx"
-"9"="bkhaagjahfmjljalopjnoealnfndnagc;https://clients2.google.com/service/update2/crx"
-"10"="bcjindcccaagfpapjjmafapmmgkkhgoa;https://clients2.google.com/service/update2/crx"
-"11"="gppongmhjkpfnbhagpmjfkannfbllamg;https://clients2.google.com/service/update2/crx"
-"12"="fkeaekngjflipcockcnpobkpbbfbhmdn;https://clients2.google.com/service/update2/crx"

@@ -135,20 +135,5 @@
     # Disable autoplay
     AutoplayAllowed = false;
 
-    # Force-install extensions
-    ExtensionInstallForcelist = [
-      "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"  # uBlock Origin Lite
-      "eimadpbcbfnmbkopoojfekhnkhdbieeh;https://clients2.google.com/service/update2/crx"  # Dark Reader
-      "nngceckbapebfimnlniiiahkandclblb;https://clients2.google.com/service/update2/crx"  # Bitwarden Password Manager
-      "mnjggcdmjocbbbhaepdhchncahnbgone;https://clients2.google.com/service/update2/crx"  # SponsorBlock for YouTube - Skip Sponsorships
-      "gebbhagfogifgggkldgodflihgfeippi;https://clients2.google.com/service/update2/crx"  # Return YouTube Dislike
-      "hkligngkgcpcolhcnkgccglchdafcnao;https://clients2.google.com/service/update2/crx"  # Web Archives
-      "cnojnbdhbhnkbcieeekonklommdnndci;https://clients2.google.com/service/update2/crx"  # Search by Image
-      "hlepfoohegkhhmjieoechaddaejaokhf;https://clients2.google.com/service/update2/crx"  # Refined GitHub
-      "bkhaagjahfmjljalopjnoealnfndnagc;https://clients2.google.com/service/update2/crx"  # Octotree - GitHub code tree
-      "bcjindcccaagfpapjjmafapmmgkkhgoa;https://clients2.google.com/service/update2/crx"  # JSON Formatter
-      "gppongmhjkpfnbhagpmjfkannfbllamg;https://clients2.google.com/service/update2/crx"  # Wappalyzer - Technology profiler
-      "fkeaekngjflipcockcnpobkpbbfbhmdn;https://clients2.google.com/service/update2/crx"  # Copy as Markdown
-    ];
   };
 }
