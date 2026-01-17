@@ -1,0 +1,69 @@
+Windows Registry Editor Version 5.00
+
+; Chrome Privacy/Security Policies
+; Run as Administrator to apply system-wide
+; Note: Translation (TranslateEnabled) intentionally left enabled
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome]
+; Security
+"HttpsOnlyMode"="force_enabled"
+"SafeBrowsingProtectionLevel"=dword:00000001
+"ShowFullUrlsInAddressBar"=dword:00000001
+"DnsOverHttpsMode"="secure"
+"DnsOverHttpsTemplates"="https://1.1.1.1/dns-query https://9.9.9.9/dns-query"
+
+; Privacy - disable telemetry and Google services
+"MetricsReportingEnabled"=dword:00000000
+"SafeBrowsingExtendedReportingEnabled"=dword:00000000
+"UrlKeyedAnonymizedDataCollectionEnabled"=dword:00000000
+"SpellCheckServiceEnabled"=dword:00000000
+"AlternateErrorPagesEnabled"=dword:00000000
+"SearchSuggestEnabled"=dword:00000000
+"NetworkPredictionOptions"=dword:00000002
+"BrowserSignin"=dword:00000000
+"SyncDisabled"=dword:00000001
+"BackgroundModeEnabled"=dword:00000000
+"ClickToCallEnabled"=dword:00000000
+"GoogleSearchSidePanelEnabled"=dword:00000000
+"PromotionalTabsEnabled"=dword:00000000
+"ShoppingListEnabled"=dword:00000000
+"PaymentMethodQueryEnabled"=dword:00000000
+"PasswordManagerEnabled"=dword:00000000
+"AutofillAddressEnabled"=dword:00000000
+"AutofillCreditCardEnabled"=dword:00000000
+"RemoteDebuggingAllowed"=dword:00000000
+
+; Privacy - cookies and tracking
+"BlockThirdPartyCookies"=dword:00000001
+"WebRtcIPHandling"="disable_non_proxied_udp"
+"EnableMediaRouter"=dword:00000000
+
+; Privacy - disable AI features
+"GenAIDefaultSettings"=dword:00000002
+"CreateThemesSettings"=dword:00000002
+"HelpMeWriteSettings"=dword:00000002
+"TabOrganizerSettings"=dword:00000002
+
+; Privacy - device access (notifications blocked, others ask permission)
+"DefaultNotificationsSetting"=dword:00000002
+"DefaultGeolocationSetting"=dword:00000003
+"DefaultSensorsSetting"=dword:00000003
+"DefaultWebUsbGuardSetting"=dword:00000003
+
+; Disable autoplay
+"AutoplayAllowed"=dword:00000000
+
+; Force-install extensions
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome\ExtensionInstallForcelist]
+"1"="ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
+"2"="eimadpbcbfnmbkopoojfekhnkhdbieeh;https://clients2.google.com/service/update2/crx"
+"3"="nngceckbapebfimnlniiiahkandclblb;https://clients2.google.com/service/update2/crx"
+"4"="mnjggcdmjocbbbhaepdhchncahnbgone;https://clients2.google.com/service/update2/crx"
+"5"="gebbhagfogifgggkldgodflihgfeippi;https://clients2.google.com/service/update2/crx"
+"6"="hkligngkgcpcolhcnkgccglchdafcnao;https://clients2.google.com/service/update2/crx"
+"7"="cnojnbdhbhnkbcieeekonklommdnndci;https://clients2.google.com/service/update2/crx"
+"8"="hlepfoohegkhhmjieoechaddaejaokhf;https://clients2.google.com/service/update2/crx"
+"9"="bkhaagjahfmjljalopjnoealnfndnagc;https://clients2.google.com/service/update2/crx"
+"10"="bcjindcccaagfpapjjmafapmmgkkhgoa;https://clients2.google.com/service/update2/crx"
+"11"="gppongmhjkpfnbhagpmjfkannfbllamg;https://clients2.google.com/service/update2/crx"
+"12"="fkeaekngjflipcockcnpobkpbbfbhmdn;https://clients2.google.com/service/update2/crx"
