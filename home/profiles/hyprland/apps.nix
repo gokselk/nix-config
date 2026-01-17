@@ -92,7 +92,7 @@
     SafeBrowsingProtectionLevel = 1;  # Standard protection
     ShowFullUrlsInAddressBar = true;
     DnsOverHttpsMode = "secure";
-    DnsOverHttpsTemplates = "https://1.1.1.1/dns-query https://9.9.9.9/dns-query";
+    DnsOverHttpsTemplates = "https://1.1.1.1/dns-query https://8.8.8.8/dns-query";
 
     # Privacy - disable telemetry and Google services
     MetricsReportingEnabled = false;
