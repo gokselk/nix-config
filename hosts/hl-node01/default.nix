@@ -23,6 +23,12 @@
   # Hostname
   networking.hostName = "hl-node01";
 
+  # Disable suspend (server needs to stay awake)
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
+
   # ZFS requires a unique hostId
   # Generate with: head -c 8 /etc/machine-id
   networking.hostId = "962c5737";
