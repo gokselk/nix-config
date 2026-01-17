@@ -45,6 +45,7 @@ in
     enable = true;
     enableZshIntegration = true;
     enableBashIntegration = true;
+    flags = [ "--disable-up-arrow" ];
   };
 
   # GitHub CLI
