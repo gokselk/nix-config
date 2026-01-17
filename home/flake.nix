@@ -56,7 +56,7 @@
           hostname = "hl-node01";
           extraModules = [
             ./profiles/development
-            ./profiles/gnome
+            ./profiles/kde
           ];
         };
 

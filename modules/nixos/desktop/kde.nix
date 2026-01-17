@@ -1,17 +1,14 @@
-# GNOME desktop with RDP for remote access
+# KDE Plasma desktop with RDP for remote access
 { config, lib, pkgs, ... }:
 {
-  # GNOME Desktop Environment (Wayland)
-  services.displayManager.gdm = {
+  # KDE Plasma Desktop Environment (Wayland)
+  services.displayManager.sddm = {
     enable = true;
-    wayland = true;
+    wayland.enable = true;
   };
-  services.desktopManager.gnome.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
-  # Enable gnome-remote-desktop for RDP access
-  services.gnome.gnome-remote-desktop.enable = true;
-
-  # PipeWire audio (required for screen sharing/RDP)
+  # PipeWire audio
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -19,18 +16,8 @@
     pulse.enable = true;
   };
 
-  # Firewall: allow RDP
+  # Firewall: allow RDP (krfb uses port 3389)
   networking.firewall.allowedTCPPorts = [ 3389 ];
-
-  # Remove some GNOME bloat
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-tour
-    gnome-music
-    epiphany        # web browser
-    geary           # email
-    totem           # video player
-    yelp            # help
-  ];
 
   # Fonts
   fonts = {

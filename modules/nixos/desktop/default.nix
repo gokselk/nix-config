@@ -1,9 +1,9 @@
 # Desktop environment module
-# GNOME with RDP for remote access
+# KDE Plasma with RDP for remote access
 { config, lib, pkgs, ... }:
 {
   imports = [
     ./graphics.nix
-    ./gnome.nix
+    ./kde.nix
   ];
 }
