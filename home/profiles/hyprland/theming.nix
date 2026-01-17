@@ -1,47 +1,8 @@
-# Theming configuration
-# Catppuccin, GTK, Qt, cursor, and terminal
+# Hyprland-specific theming (hyprcursor)
 { config, pkgs, lib, ... }:
 {
-  # Terminal: ghostty
-  programs.ghostty = {
-    enable = true;
-    settings = {
-      font-family = "JetBrainsMono Nerd Font";
-      font-size = 11;
-      window-padding-x = 10;
-      window-padding-y = 10;
-    };
-  };
+  imports = [ ../theming ];
 
-  # Catppuccin theming
-  catppuccin = {
-    flavor = "mocha";
-    accent = "blue";
-    ghostty.enable = true;
-  };
-
-  # GTK settings
-  gtk = {
-    enable = true;
-    font = {
-      name = "Inter";
-      size = 11;
-    };
-  };
-
-  # Qt theming (use Breeze to avoid Qt5 dependencies)
-  qt = {
-    enable = true;
-    platformTheme.name = "kde";
-    style.name = "breeze";
-  };
-
-  # Cursor theme
-  home.pointerCursor = {
-    name = "catppuccin-mocha-dark-cursors";
-    package = pkgs.catppuccin-cursors.mochaDark;
-    size = 24;
-    gtk.enable = true;
-    hyprcursor.enable = true;
-  };
+  # Enable hyprcursor for Hyprland
+  home.pointerCursor.hyprcursor.enable = true;
 }
