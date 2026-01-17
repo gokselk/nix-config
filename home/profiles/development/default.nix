@@ -1,6 +1,9 @@
 # Development profile
 # Tools for software development and DevOps
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
+let
+  llm = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in
 {
   imports = [
     ./kubernetes.nix
@@ -15,6 +18,9 @@
     httpie        # HTTP client
     usql          # Universal SQL client
     tokei         # Code statistics
+
+    # AI coding agents
+    llm.claude-code
   ];
 
   # Direnv integration
