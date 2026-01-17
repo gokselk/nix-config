@@ -1,9 +1,9 @@
 # Desktop environment module
-# Hyprland Wayland compositor with uwsm session management
+# GNOME with RDP for remote access
 { config, lib, pkgs, ... }:
 {
   imports = [
     ./graphics.nix
-    ./hyprland.nix
+    ./gnome.nix
   ];
 }
