@@ -18,7 +18,6 @@
     flavor = "mocha";
     accent = "blue";
     ghostty.enable = true;
-    gtk.enable = true;
   };
 
   # GTK settings
