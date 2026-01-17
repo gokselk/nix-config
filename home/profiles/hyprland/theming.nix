@@ -3,6 +3,12 @@
 {
   imports = [ ../theming ];
 
-  # Enable hyprcursor for Hyprland
-  home.pointerCursor.hyprcursor.enable = true;
+  # Cursor theme
+  home.pointerCursor = {
+    name = "catppuccin-mocha-dark-cursors";
+    package = pkgs.catppuccin-cursors.mochaDark;
+    size = 24;
+    gtk.enable = true;
+    hyprcursor.enable = true;
+  };
 }
