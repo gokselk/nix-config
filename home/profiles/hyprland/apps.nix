@@ -1,5 +1,5 @@
 # Desktop applications
-# Packages, session variables, XDG, mpv, brave policies
+# Packages, session variables, XDG, mpv, Chrome policies
 { config, pkgs, lib, ... }:
 {
   # Wayland utilities and desktop applications
@@ -28,7 +28,7 @@
     wev
 
     # Browser
-    brave
+    google-chrome
 
     # Editor
     vscode-fhs
@@ -69,7 +69,7 @@
 
   # Desktop environment variables
   home.sessionVariables = {
-    BROWSER = "brave";
+    BROWSER = "google-chrome-stable";
     TERMINAL = "ghostty";
   };
 
@@ -84,13 +84,71 @@
     };
   };
 
-  # Brave debloat policies
-  xdg.configFile."BraveSoftware/Brave-Browser/policies/managed/policies.json".text = builtins.toJSON {
-    BraveRewardsDisabled = true;
-    BraveWalletDisabled = true;
-    BraveNewsEnabled = false;
-    BraveLeoAssistantEnabled = false;
-    BraveVPNDisabled = true;
+  # Chrome privacy/security policies
+  # Note: Translation (TranslateEnabled) intentionally left enabled
+  xdg.configFile."google-chrome/policies/managed/policies.json".text = builtins.toJSON {
+    # Security
+    HttpsOnlyMode = "force_enabled";
+    SafeBrowsingProtectionLevel = 1;  # Standard protection
+    ShowFullUrlsInAddressBar = true;
+    DnsOverHttpsMode = "secure";
+    DnsOverHttpsTemplates = "https://1.1.1.1/dns-query https://9.9.9.9/dns-query";
+
+    # Privacy - disable telemetry and Google services
     MetricsReportingEnabled = false;
+    SafeBrowsingExtendedReportingEnabled = false;
+    UrlKeyedAnonymizedDataCollectionEnabled = false;
+    SpellCheckServiceEnabled = false;
+    AlternateErrorPagesEnabled = false;
+    SearchSuggestEnabled = false;
+    NetworkPredictionOptions = 2;  # Disabled
+    BrowserSignin = 0;
+    SyncDisabled = true;
+    BackgroundModeEnabled = false;
+    ClickToCallEnabled = false;
+    GoogleSearchSidePanelEnabled = false;
+    PromotionalTabsEnabled = false;
+    ShoppingListEnabled = false;
+    PaymentMethodQueryEnabled = false;
+    PasswordManagerEnabled = false;  # Using Bitwarden
+    AutofillAddressEnabled = false;
+    AutofillCreditCardEnabled = false;
+    RemoteDebuggingAllowed = false;
+
+    # Privacy - cookies and tracking
+    BlockThirdPartyCookies = true;
+    WebRtcIPHandling = "disable_non_proxied_udp";
+    EnableMediaRouter = false;
+
+    # Privacy - disable AI features
+    GenAIDefaultSettings = 2;  # Disabled
+    CreateThemesSettings = 2;
+    HelpMeWriteSettings = 2;
+    TabOrganizerSettings = 2;
+
+    # Privacy - device access (ask permission, notifications blocked)
+    DefaultNotificationsSetting = 2;
+    DefaultGeolocationSetting = 3;
+    DefaultSensorsSetting = 3;
+    DefaultWebUsbGuardSetting = 3;
+
+    # Disable autoplay
+    AutoplayAllowed = false;
+
+    # Force-install extensions
+    ExtensionInstallForcelist = [
+      "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"  # uBlock Origin Lite
+      "eimadpbcbfnmbkopoojfekhnkhdbieeh;https://clients2.google.com/service/update2/crx"  # Dark Reader
+      "nngceckbapebfimnlniiiahkandclblb;https://clients2.google.com/service/update2/crx"  # Bitwarden Password Manager
+      "mnjggcdmjocbbbhaepdhchncahnbgone;https://clients2.google.com/service/update2/crx"  # SponsorBlock for YouTube - Skip Sponsorships
+      "gebbhagfogifgggkldgodflihgfeippi;https://clients2.google.com/service/update2/crx"  # Return YouTube Dislike
+      "hkligngkgcpcolhcnkgccglchdafcnao;https://clients2.google.com/service/update2/crx"  # Web Archives
+      "cnojnbdhbhnkbcieeekonklommdnndci;https://clients2.google.com/service/update2/crx"  # Search by Image
+      "hlepfoohegkhhmjieoechaddaejaokhf;https://clients2.google.com/service/update2/crx"  # Refined GitHub
+      "bkhaagjahfmjljalopjnoealnfndnagc;https://clients2.google.com/service/update2/crx"  # Octotree - GitHub code tree
+      "bcjindcccaagfpapjjmafapmmgkkhgoa;https://clients2.google.com/service/update2/crx"  # JSON Formatter
+      "gppongmhjkpfnbhagpmjfkannfbllamg;https://clients2.google.com/service/update2/crx"  # Wappalyzer - Technology profiler
+      "fkeaekngjflipcockcnpobkpbbfbhmdn;https://clients2.google.com/service/update2/crx"  # Copy as Markdown
+    ];
   };
 }
