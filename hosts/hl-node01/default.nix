@@ -29,6 +29,9 @@
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
 
+  # Disable NetworkManager (use declarative bridge networking)
+  networking.networkmanager.enable = false;
+
   # ZFS requires a unique hostId
   # Generate with: head -c 8 /etc/machine-id
   networking.hostId = "962c5737";

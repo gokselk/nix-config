@@ -8,9 +8,6 @@
   };
   services.desktopManager.gnome.enable = true;
 
-  # Disable NetworkManager (use declarative networking)
-  networking.networkmanager.enable = false;
-
   # Enable gnome-remote-desktop for RDP access
   services.gnome.gnome-remote-desktop.enable = true;
 
