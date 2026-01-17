@@ -180,7 +180,7 @@ secrets-decrypt file:
 
 [group('secrets')]
 [doc("Get host's age public key from SSH host key")]
-host-key host="mini":
+host-key host="hl-node01":
     ssh {{host}} "cat /etc/ssh/ssh_host_ed25519_key.pub" | ssh-to-age
 
 # ─── Deploy ───────────────────────────────────────

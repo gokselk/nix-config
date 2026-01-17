@@ -44,11 +44,11 @@
     in
     {
       homeConfigurations = {
-        # NixOS Mini PC
-        "goksel@mini" = mkHome {
+        # Main homelab server
+        "goksel@hl-node01" = mkHome {
           username = "goksel";
           system = "x86_64-linux";
-          hostname = "mini";
+          hostname = "hl-node01";
           extraModules = [
             ./profiles/development
             ./profiles/hyprland
@@ -56,20 +56,20 @@
         };
 
         # NixOS WSL
-        "goksel@desktop-wsl" = mkHome {
+        "goksel@gk-desktop-wsl" = mkHome {
           username = "goksel";
           system = "x86_64-linux";
-          hostname = "desktop-wsl";
+          hostname = "gk-desktop-wsl";
           extraModules = [
             ./profiles/development
           ];
         };
 
         # macOS - Personal MacBook Air M2
-        "goksel@goksel-air" = mkHome {
+        "goksel@gk-air" = mkHome {
           username = "goksel";
           system = "aarch64-darwin";
-          hostname = "goksel-air";
+          hostname = "gk-air";
           extraModules = [
             ./profiles/development
             ./profiles/darwin

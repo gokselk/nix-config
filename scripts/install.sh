@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # NixOS installation script using nixos-anywhere
 # Usage: ./install.sh <hostname> <target-host>
-# Example: ./install.sh mini root@192.168.1.100
+# Example: ./install.sh hl-node01 root@192.168.1.100
 
 set -euo pipefail
 
@@ -18,11 +18,11 @@ usage() {
     echo "Usage: $0 <hostname> <target-host>"
     echo ""
     echo "Arguments:"
-    echo "  hostname     NixOS configuration name (e.g., mini, desktop-wsl)"
+    echo "  hostname     NixOS configuration name (e.g., hl-node01, gk-desktop-wsl)"
     echo "  target-host  SSH target (e.g., root@192.168.1.100)"
     echo ""
     echo "Example:"
-    echo "  $0 mini root@192.168.1.100"
+    echo "  $0 hl-node01 root@192.168.1.100"
     echo ""
     echo "Prerequisites:"
     echo "  1. Target machine booted from NixOS installer or has SSH access"

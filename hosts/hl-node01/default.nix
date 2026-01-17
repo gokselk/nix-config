@@ -1,5 +1,5 @@
-# Mini host configuration
-# AMD Ryzen 6800H, 16GB RAM, 500GB SSD
+# hl-node01 - Main homelab server
+# Nipogi E3B: AMD Ryzen 6800H, 16GB RAM, 500GB SSD
 { config, lib, pkgs, inputs, ... }:
 {
   imports = [
@@ -21,7 +21,7 @@
   ];
 
   # Hostname
-  networking.hostName = "mini";
+  networking.hostName = "hl-node01";
 
   # ZFS requires a unique hostId
   # Generate with: head -c 8 /etc/machine-id

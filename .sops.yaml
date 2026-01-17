@@ -6,10 +6,10 @@ keys:
   # goksel's age key (from SSH key via ssh-to-age)
   - &goksel age1kz7n7l8rgu3cpwf5wyyleslanjnavglgmstvlfqmshw424mvpfssy4sy3y
 
-  # mini's age key (derived from SSH host key via ssh-to-age)
-  # Get with: just host-key mini
+  # hl-node01's age key (derived from SSH host key via ssh-to-age)
+  # Get with: just host-key hl-node01
   # After reinstall: update this key and run `just secrets-update`
-  - &mini age1qene8xdfrnyxc68s60rt6rqtq4rxnd6fnhwxxg3fns7gt46ypqsqfdapa0
+  - &hl-node01 age1qene8xdfrnyxc68s60rt6rqtq4rxnd6fnhwxxg3fns7gt46ypqsqfdapa0
 
 creation_rules:
   # NixOS system secrets (encrypt to both user + host)
@@ -17,7 +17,7 @@ creation_rules:
     key_groups:
       - age:
           - *goksel
-          - *mini
+          - *hl-node01
 
   # Home-manager user secrets (user key only)
   - path_regex: home/secrets/.*\.yaml$
@@ -30,4 +30,4 @@ creation_rules:
     key_groups:
       - age:
           - *goksel
-          - *mini
+          - *hl-node01

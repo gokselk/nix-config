@@ -26,7 +26,7 @@ just check                    # Validate flake
 # Secrets
 just secrets-edit <file>      # Edit encrypted secret
 just secrets-rekey            # Re-encrypt all after key change
-just host-key mini            # Get host's age public key
+just host-key hl-node01       # Get host's age public key
 
 # Kubernetes
 just argocd-setup             # Bootstrap ArgoCD
@@ -46,9 +46,9 @@ Two-flake structure:
 ### System Configurations (flake.nix)
 
 Uses `mkHost` helper for NixOS and `mkDarwin` for macOS:
-- `nixosConfigurations.mini` - Main server (AMD Ryzen 6800H)
-- `nixosConfigurations.desktop-wsl` - WSL instance
-- `darwinConfigurations.goksel-air` - MacBook Air M2
+- `nixosConfigurations.hl-node01` - Main homelab server (Nipogi E3B, AMD Ryzen 6800H)
+- `nixosConfigurations.gk-desktop-wsl` - WSL instance
+- `darwinConfigurations.gk-air` - MacBook Air M2
 
 Host structure: `hosts/<hostname>/default.nix` imports hardware, networking, and modules from `modules/nixos/` or `modules/darwin/`.
 
@@ -66,7 +66,7 @@ Configuration: `home/users/<username>/default.nix`
 
 ### Kubernetes (GitOps via ArgoCD)
 
-ArgoCD watches `manifests/apps/` and auto-syncs to k3s cluster on mini.
+ArgoCD watches `manifests/apps/` and auto-syncs to k3s cluster on hl-node01.
 
 Each app follows pattern:
 - `manifests/apps/<app>/application.yaml` - ArgoCD Application

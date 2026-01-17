@@ -1,4 +1,4 @@
-# ZFS disk configuration for mini
+# ZFS disk configuration for hl-node01
 # Uses disko for declarative disk partitioning
 # Layout based on Graham Christensen's ZFS dataset philosophy
 { lib, ... }:

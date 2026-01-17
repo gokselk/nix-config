@@ -92,15 +92,15 @@
     in
     {
       nixosConfigurations = {
-        # Main target: Mini PC (AMD Ryzen 6800H)
-        mini = mkHost {
-          hostname = "mini";
+        # Main homelab server: Nipogi E3B (AMD Ryzen 6800H)
+        hl-node01 = mkHost {
+          hostname = "hl-node01";
           system = "x86_64-linux";
         };
 
-        # Future: WSL instance on Windows desktop
-        desktop-wsl = mkHost {
-          hostname = "desktop-wsl";
+        # WSL instance on Windows desktop
+        gk-desktop-wsl = mkHost {
+          hostname = "gk-desktop-wsl";
           system = "x86_64-linux";
           extraModules = [ nixos-wsl.nixosModules.wsl ];
         };
@@ -108,8 +108,8 @@
 
       darwinConfigurations = {
         # Personal MacBook Air M2
-        goksel-air = mkDarwin {
-          hostname = "goksel-air";
+        gk-air = mkDarwin {
+          hostname = "gk-air";
           system = "aarch64-darwin";
         };
       };

@@ -1,4 +1,4 @@
-# Network configuration for mini
+# Network configuration for hl-node01
 # Bridge for VM/container networking
 _:
 {

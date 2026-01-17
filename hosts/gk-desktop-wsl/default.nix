@@ -1,4 +1,4 @@
-# WSL host configuration (future)
+# gk-desktop-wsl - WSL instance on Windows desktop
 { config, lib, pkgs, inputs, ... }:
 {
   imports = [
@@ -21,7 +21,7 @@
   };
 
   # Hostname
-  networking.hostName = "desktop-wsl";
+  networking.hostName = "gk-desktop-wsl";
 
   # System state version
   system.stateVersion = "24.11";
