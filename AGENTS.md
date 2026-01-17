@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to AI coding assistants when working with code in this repository.
 
 ## Common Commands
 
@@ -10,6 +10,7 @@ just rebuild
 
 # Darwin/macOS rebuild (current host)
 just darwin
+just darwin-bootstrap <host>  # First-time nix-darwin install
 
 # Home-manager switch
 just home
@@ -17,8 +18,10 @@ just home
 # Update flake inputs
 just update
 
-# Test config without switching
-just test
+# Test/validate without switching
+just test                     # Test NixOS config
+just dry-run                  # Preview what would change
+just check                    # Validate flake
 
 # Secrets
 just secrets-edit <file>      # Edit encrypted secret
@@ -28,6 +31,10 @@ just host-key mini            # Get host's age public key
 # Kubernetes
 just argocd-setup             # Bootstrap ArgoCD
 just argocd-password          # Get admin password
+
+# Maintenance
+just gc                       # Garbage collect old generations
+just deploy <host>            # Deploy to remote host via SSH
 ```
 
 ## Architecture
