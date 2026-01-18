@@ -68,7 +68,7 @@
       "$mod" = "SUPER";
       bind = [
         # Application launchers
-        "$mod, Return, exec, ghostty"
+        "$mod, Return, exec, kitty"
         "$mod, D, exec, rofi -show drun"
         "$mod, Q, killactive,"
         "$mod, M, exit,"

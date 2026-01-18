@@ -2,14 +2,17 @@
 # Catppuccin, GTK, Qt, cursor, and terminal
 { config, pkgs, lib, ... }:
 {
-  # Terminal: ghostty
-  programs.ghostty = {
+  # Terminal: kitty
+  programs.kitty = {
     enable = true;
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 11;
+    };
     settings = {
-      font-family = "JetBrainsMono Nerd Font";
-      font-size = 11;
-      window-padding-x = 10;
-      window-padding-y = 10;
+      window_padding_width = 10;
+      confirm_os_window_close = 0;
+      enable_audio_bell = false;
     };
   };
 
@@ -17,7 +20,7 @@
   catppuccin = {
     flavor = "mocha";
     accent = "blue";
-    ghostty.enable = true;
+    kitty.enable = true;
   };
 
   # GTK settings

@@ -70,7 +70,7 @@
   # Desktop environment variables
   home.sessionVariables = {
     BROWSER = "brave";
-    TERMINAL = "ghostty";
+    TERMINAL = "kitty";
   };
 
   # mpv with gpu-next, vulkan, hq profile
