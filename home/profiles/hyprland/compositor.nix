@@ -70,20 +70,46 @@
         # Application launchers
         "$mod, Return, exec, kitty"
         "$mod, D, exec, rofi -show drun"
+        "$mod, B, exec, brave"
         "$mod, W, killactive,"
-        "$mod, M, exit,"
+        "$mod SHIFT, M, exit,"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating,"
         "$mod, P, pseudo,"
-        "$mod, J, togglesplit,"
+        "$mod, S, togglesplit,"
         "$mod, F, fullscreen,"
-        "$mod, L, exec, hyprlock"
+        "$mod CTRL, L, exec, hyprlock"
 
-        # Move focus
+        # Window switching
+        "$mod, Tab, cyclenext,"
+        "$mod SHIFT, Tab, cyclenext, prev"
+
+        # Clipboard history
+        "$mod SHIFT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+
+        # Move focus (arrows)
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
         "$mod, up, movefocus, u"
         "$mod, down, movefocus, d"
+
+        # Move focus (vim-style)
+        "$mod, H, movefocus, l"
+        "$mod, L, movefocus, r"
+        "$mod, K, movefocus, u"
+        "$mod, J, movefocus, d"
+
+        # Move windows (arrows)
+        "$mod SHIFT, left, movewindow, l"
+        "$mod SHIFT, right, movewindow, r"
+        "$mod SHIFT, up, movewindow, u"
+        "$mod SHIFT, down, movewindow, d"
+
+        # Move windows (vim-style)
+        "$mod SHIFT, H, movewindow, l"
+        "$mod SHIFT, L, movewindow, r"
+        "$mod SHIFT, K, movewindow, u"
+        "$mod SHIFT, J, movewindow, d"
 
         # Workspaces
         "$mod, 1, workspace, 1"
@@ -116,6 +142,20 @@
         # Screenshots (with satty annotation)
         ", Print, exec, grim -g \"$(slurp)\" - | satty -f -"
         "SHIFT, Print, exec, grim - | satty -f -"
+      ];
+
+      # Volume and brightness (repeatable)
+      bindel = [
+        ", XF86AudioRaiseVolume, exec, pamixer -i 5"
+        ", XF86AudioLowerVolume, exec, pamixer -d 5"
+        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+      ];
+
+      # Mute (locked - works when screen locked too)
+      bindl = [
+        ", XF86AudioMute, exec, pamixer -t"
+        ", XF86AudioMicMute, exec, pamixer --default-source -t"
       ];
 
       # Mouse bindings
