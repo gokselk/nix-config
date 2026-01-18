@@ -1,5 +1,5 @@
 # Desktop applications
-# Packages, session variables, XDG, mpv, Chrome policies
+# Packages, session variables, XDG, mpv, Brave policies
 { config, pkgs, lib, ... }:
 {
   # Wayland utilities and desktop applications
@@ -28,7 +28,7 @@
     wev
 
     # Browser
-    google-chrome
+    brave
 
     # Editor
     vscode-fhs
@@ -69,7 +69,7 @@
 
   # Desktop environment variables
   home.sessionVariables = {
-    BROWSER = "google-chrome-stable";
+    BROWSER = "brave";
     TERMINAL = "ghostty";
   };
 
@@ -84,56 +84,26 @@
     };
   };
 
-  # Chrome privacy/security policies
-  # Note: Translation (TranslateEnabled) intentionally left enabled
-  xdg.configFile."google-chrome/policies/managed/policies.json".text = builtins.toJSON {
-    # Security
-    HttpsOnlyMode = "force_enabled";
-    SafeBrowsingProtectionLevel = 1;  # Standard protection
-    ShowFullUrlsInAddressBar = true;
-    DnsOverHttpsMode = "secure";
-    DnsOverHttpsTemplates = "https://1.1.1.1/dns-query https://8.8.8.8/dns-query";
+  # Brave privacy/debloat policies
+  xdg.configFile."BraveSoftware/Brave-Browser/policies/managed/policies.json".text = builtins.toJSON {
+    # Disable Brave-specific features
+    BraveRewardsDisabled = true;
+    BraveWalletDisabled = true;
+    BraveVPNDisabled = true;
+    BraveAIChatEnabled = false;
+    TorDisabled = true;
+    BraveNewsDisabled = true;
+    BraveTalkDisabled = true;
+    BravePlaylistEnabled = false;
+    IPFSEnabled = false;
 
-    # Privacy - disable telemetry and Google services
-    MetricsReportingEnabled = false;
-    SafeBrowsingExtendedReportingEnabled = false;
-    UrlKeyedAnonymizedDataCollectionEnabled = false;
-    SpellCheckServiceEnabled = false;
-    AlternateErrorPagesEnabled = false;
-    SearchSuggestEnabled = false;
-    NetworkPredictionOptions = 2;  # Disabled
-    BrowserSignin = 0;
-    SyncDisabled = true;
-    BackgroundModeEnabled = false;
-    ClickToCallEnabled = false;
-    GoogleSearchSidePanelEnabled = false;
-    PromotionalTabsEnabled = false;
-    ShoppingListEnabled = false;
-    PaymentMethodQueryEnabled = false;
+    # Disable telemetry
+    BraveP3AEnabled = false;
+    BraveWebDiscoveryEnabled = false;
+    BraveStatsPingEnabled = false;
+
+    # Security/Privacy
     PasswordManagerEnabled = false;  # Using Bitwarden
-    AutofillAddressEnabled = false;
-    AutofillCreditCardEnabled = false;
-    RemoteDebuggingAllowed = false;
-
-    # Privacy - cookies and tracking
-    BlockThirdPartyCookies = true;
-    WebRtcIPHandling = "disable_non_proxied_udp";
-    EnableMediaRouter = false;
-
-    # Privacy - disable AI features
-    GenAIDefaultSettings = 2;  # Disabled
-    CreateThemesSettings = 2;
-    HelpMeWriteSettings = 2;
-    TabOrganizerSettings = 2;
-
-    # Privacy - device access (ask permission, notifications blocked)
-    DefaultNotificationsSetting = 2;
-    DefaultGeolocationSetting = 3;
-    DefaultSensorsSetting = 3;
-    DefaultWebUsbGuardSetting = 3;
-
-    # Disable autoplay
-    AutoplayAllowed = false;
-
+    DnsOverHttpsMode = "automatic";
   };
 }
