@@ -30,14 +30,26 @@
       name = "Noto Sans";
       size = 11;
     };
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
-  # Qt theming (use Breeze to avoid Qt5 dependencies)
+  # Tell apps to use dark mode via portal
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
+  # Qt theming (Breeze Dark)
   qt = {
     enable = true;
     platformTheme.name = "kde";
     style.name = "breeze";
   };
+
+  # Force Qt dark mode
+  home.sessionVariables.QT_STYLE_OVERRIDE = "breeze-dark";
 
   # Cursor theme
   home.pointerCursor = {
