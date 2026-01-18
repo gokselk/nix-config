@@ -10,6 +10,7 @@
       font-size = 11;
       window-padding-x = 10;
       window-padding-y = 10;
+      background = "1e1e2e";  # Catppuccin Mocha base - prevents white flash
     };
   };
 
