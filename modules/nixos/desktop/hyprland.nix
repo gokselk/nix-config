@@ -1,11 +1,24 @@
 # Hyprland compositor with uwsm session management
 { config, lib, pkgs, ... }:
+let
+  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  sessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
+in
 {
   # Hyprland with built-in uwsm integration (NixOS 24.11+)
   programs.hyprland = {
     enable = true;
     withUWSM = true;
     xwayland.enable = true;
+  };
+
+  # greetd with tuigreet
+  services.greetd = {
+    enable = true;
+    settings.default_session = {
+      command = "${tuigreet} --time --remember --remember-session --sessions ${sessions}";
+      user = "greeter";
+    };
   };
 
   # PAM for screen locking (hyprlock)

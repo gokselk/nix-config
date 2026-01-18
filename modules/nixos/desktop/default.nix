@@ -1,9 +1,9 @@
 # Desktop environment module
-# KDE Plasma with RDP for remote access
+# Hyprland compositor with uwsm session management
 { config, lib, pkgs, ... }:
 {
   imports = [
     ./graphics.nix
-    ./kde.nix
+    ./hyprland.nix
   ];
 }
