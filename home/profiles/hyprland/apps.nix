@@ -1,5 +1,5 @@
 # Desktop applications
-# Packages, session variables, XDG, mpv, Brave policies
+# Packages, session variables, XDG, mpv
 { config, pkgs, lib, ... }:
 {
   # Wayland utilities and desktop applications
@@ -84,26 +84,4 @@
     };
   };
 
-  # Brave privacy/debloat policies
-  xdg.configFile."BraveSoftware/Brave-Browser/policies/managed/policies.json".text = builtins.toJSON {
-    # Disable Brave-specific features
-    BraveRewardsDisabled = true;
-    BraveWalletDisabled = true;
-    BraveVPNDisabled = true;
-    BraveAIChatEnabled = false;
-    TorDisabled = true;
-    BraveNewsDisabled = true;
-    BraveTalkDisabled = true;
-    BravePlaylistEnabled = false;
-    IPFSEnabled = false;
-
-    # Disable telemetry
-    BraveP3AEnabled = false;
-    BraveWebDiscoveryEnabled = false;
-    BraveStatsPingEnabled = false;
-
-    # Security/Privacy
-    PasswordManagerEnabled = false;  # Using Bitwarden
-    DnsOverHttpsMode = "automatic";
-  };
 }

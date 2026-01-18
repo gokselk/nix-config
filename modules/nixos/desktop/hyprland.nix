@@ -3,8 +3,27 @@
 let
   tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
   sessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
+
+  bravePolicy = {
+    BraveRewardsDisabled = true;
+    BraveWalletDisabled = true;
+    BraveVPNDisabled = true;
+    BraveAIChatEnabled = false;
+    TorDisabled = true;
+    BraveNewsDisabled = true;
+    BraveTalkDisabled = true;
+    BravePlaylistEnabled = false;
+    IPFSEnabled = false;
+    BraveP3AEnabled = false;
+    BraveWebDiscoveryEnabled = false;
+    BraveStatsPingEnabled = false;
+    PasswordManagerEnabled = false;
+    DnsOverHttpsMode = "automatic";
+  };
 in
 {
+  # Brave browser policies (must be in /etc for Linux)
+  environment.etc."brave/policies/managed/policies.json".text = builtins.toJSON bravePolicy;
   # Hyprland with built-in uwsm integration (NixOS 24.11+)
   programs.hyprland = {
     enable = true;
