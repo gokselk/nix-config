@@ -1,7 +1,7 @@
 # Hyprland compositor with uwsm session management
 { config, lib, pkgs, ... }:
 let
-  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
   sessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
 in
 {
