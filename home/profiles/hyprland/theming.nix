@@ -41,10 +41,9 @@
 
   # Cursor theme
   home.pointerCursor = {
-    name = "catppuccin-mocha-dark-cursors";
-    package = pkgs.catppuccin-cursors.mochaDark;
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
     size = 24;
     gtk.enable = true;
-    hyprcursor.enable = true;
   };
 }
