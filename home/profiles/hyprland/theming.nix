@@ -45,11 +45,8 @@
   qt = {
     enable = true;
     platformTheme.name = "kde";
-    style.name = "breeze";
+    style.name = "breeze-dark";
   };
-
-  # Force Qt dark mode
-  home.sessionVariables.QT_STYLE_OVERRIDE = "breeze-dark";
 
   # Cursor theme
   home.pointerCursor = {
