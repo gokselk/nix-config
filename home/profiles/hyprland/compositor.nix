@@ -70,7 +70,7 @@
         # Application launchers
         "$mod, Return, exec, kitty"
         "$mod, D, exec, rofi -show drun"
-        "$mod, Q, killactive,"
+        "$mod, W, killactive,"
         "$mod, M, exit,"
         "$mod, E, exec, nautilus"
         "$mod, V, togglefloating,"
