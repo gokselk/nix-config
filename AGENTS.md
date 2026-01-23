@@ -28,10 +28,6 @@ just secrets-edit <file>      # Edit encrypted secret
 just secrets-rekey            # Re-encrypt all after key change
 just host-key hl-node01       # Get host's age public key
 
-# Kubernetes
-just argocd-setup             # Bootstrap ArgoCD
-just argocd-password          # Get admin password
-
 # Maintenance
 just gc                       # Garbage collect old generations
 just deploy <host>            # Deploy to remote host via SSH
@@ -64,21 +60,11 @@ Uses `mkHome` helper with composable profiles:
 
 Configuration: `home/users/<username>/default.nix`
 
-### Kubernetes (GitOps via ArgoCD)
-
-ArgoCD watches `manifests/apps/` and auto-syncs to k3s cluster on hl-node01.
-
-Each app follows pattern:
-- `manifests/apps/<app>/application.yaml` - ArgoCD Application
-- `manifests/apps/<app>/kustomization.yaml` - Kustomize config
-- `manifests/apps/<app>/secret.enc.yaml` - SOPS-encrypted secrets (ksops)
-
 ### Secrets (SOPS + age)
 
-Configuration in `.sops.yaml`. Three encryption contexts:
+Configuration in `.sops.yaml`. Two encryption contexts:
 - `secrets/*.yaml` - NixOS secrets (user + host keys)
 - `home/secrets/*.yaml` - User secrets (user key only)
-- `manifests/*secret*.yaml` - Kubernetes secrets (user + host for ksops)
 
 SSH host key auto-converts to age key for decryption on servers.
 
@@ -91,5 +77,4 @@ SSH host key auto-converts to age key for decryption on servers.
 | `modules/nixos/` | NixOS modules (core, networking, storage, secrets) |
 | `modules/darwin/` | Darwin modules (core, system, homebrew) |
 | `home/profiles/` | Composable home-manager profiles |
-| `manifests/argocd/app-of-apps.yaml` | Root ArgoCD application |
 | `.sops.yaml` | SOPS encryption rules + age keys |

@@ -7,7 +7,6 @@
     ./disk-config.nix
     ./hardware.nix
     ./networking.nix
-    ./k3s.nix
     ./incus.nix
 
     # Common modules
