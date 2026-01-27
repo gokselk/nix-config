@@ -62,6 +62,16 @@
     BraveWalletDisabled = true;
     BraveVPNDisabled = true;
     BraveAIChatEnabled = false;
+    TorDisabled = true;
+    BraveNewsDisabled = true;
+    BraveTalkDisabled = true;
+    BravePlaylistEnabled = false;
+    IPFSEnabled = false;
+    BraveP3AEnabled = false;
+    BraveWebDiscoveryEnabled = false;
+    BraveStatsPingEnabled = false;
+    PasswordManagerEnabled = false;
+    DnsOverHttpsMode = "automatic";
   };
 
   # Firewall: Open RDP port
