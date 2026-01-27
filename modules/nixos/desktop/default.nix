@@ -1,9 +1,9 @@
 # Desktop environment module
-# Hyprland compositor with uwsm session management
+# GNOME with Remote Desktop (RDP) support
 { config, lib, pkgs, ... }:
 {
   imports = [
     ./graphics.nix
-    ./hyprland.nix
+    ./gnome.nix
   ];
 }
