@@ -4,6 +4,9 @@ _:
 {
   networking.useDHCP = false;
 
+  # Enable systemd-resolved for proper DNS integration with Tailscale
+  services.resolved.enable = true;
+
   # Bridge with physical NIC - inherits MAC from eno1 automatically
   networking.bridges.vmbr0 = {
     interfaces = [ "eno1" ];
