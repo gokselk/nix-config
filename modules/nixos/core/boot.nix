@@ -7,4 +7,9 @@
 
   # Limit number of generations to keep
   boot.loader.systemd-boot.configurationLimit = 10;
+
+  # Quiet boot (suppress messages before Plymouth)
+  boot.kernelParams = [ "quiet" "splash" ];
+  boot.consoleLogLevel = 0;
+  boot.initrd.verbose = false;
 }
