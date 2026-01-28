@@ -7,6 +7,10 @@
     "d /run/gdm/.config 0711 gdm gdm -"
     "L+ /run/gdm/.config/monitors.xml - - - - /home/goksel/.config/monitors.xml"
   ];
+
+  # Plymouth boot splash (smoother boot + login transitions)
+  boot.plymouth.enable = true;
+
   # GDM Display Manager (Wayland)
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
