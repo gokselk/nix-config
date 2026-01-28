@@ -21,7 +21,9 @@
 
   # Set experimental-features globally (required for GDM compatibility with fractional scaling)
   # Without this, monitors.xml is incompatible between GDM and user session, causing flicker
+  # lockAll prevents user-db from overriding these settings
   programs.dconf.profiles.gdm.databases = [{
+    lockAll = true;
     settings."org/gnome/mutter".experimental-features = [ "scale-monitor-framebuffer" "xwayland-native-scaling" ];
   }];
 
