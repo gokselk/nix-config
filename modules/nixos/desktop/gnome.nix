@@ -3,16 +3,40 @@
 { config, lib, pkgs, ... }:
 
 let
-  # Read user's monitors.xml at build time and create a Nix store file
-  # GDM can read this (unlike direct symlink to user's home)
-  monitorsXmlContent = builtins.readFile /home/goksel/.config/monitors.xml;
-  monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
+  # GDM monitors.xml - inline to avoid pure eval issues
+  # GNOME 49+ path: /var/lib/gdm/seat0/config/monitors.xml
+  monitorsXml = pkgs.writeText "gdm-monitors.xml" ''
+    <monitors version="2">
+      <configuration>
+        <layoutmode>logical</layoutmode>
+        <logicalmonitor>
+          <x>0</x>
+          <y>0</y>
+          <scale>1.5</scale>
+          <primary>yes</primary>
+          <monitor>
+            <monitorspec>
+              <connector>DP-2</connector>
+              <vendor>GBT</vendor>
+              <product>M27U</product>
+              <serial>23323B000512</serial>
+            </monitorspec>
+            <mode>
+              <width>3840</width>
+              <height>2160</height>
+              <rate>143.999</rate>
+            </mode>
+          </monitor>
+        </logicalmonitor>
+      </configuration>
+    </monitors>
+  '';
 in
 {
-  # Apply user display settings to GDM login screen
+  # Apply user display settings to GDM login screen (GNOME 49+ path)
   systemd.tmpfiles.rules = [
-    "d /run/gdm/.config 0711 gdm gdm -"
-    "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
+    "d /var/lib/gdm/seat0/config 0755 gdm gdm -"
+    "L+ /var/lib/gdm/seat0/config/monitors.xml - - - - ${monitorsXml}"
   ];
 
   # Plymouth boot splash (smoother boot + login transitions)
