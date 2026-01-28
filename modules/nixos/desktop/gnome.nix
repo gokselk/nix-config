@@ -1,12 +1,18 @@
 # GNOME Desktop Environment
 # Minimal GNOME with Remote Desktop (RDP) support
 { config, lib, pkgs, ... }:
+
+let
+  # Read user's monitors.xml at build time and create a Nix store file
+  # GDM can read this (unlike direct symlink to user's home)
+  monitorsXmlContent = builtins.readFile /home/goksel/.config/monitors.xml;
+  monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
+in
 {
   # Apply user display settings to GDM login screen
-  # Copy instead of symlink because gdm user can't read /home/goksel
   systemd.tmpfiles.rules = [
     "d /run/gdm/.config 0711 gdm gdm -"
-    "C+ /run/gdm/.config/monitors.xml 0644 gdm gdm - /home/goksel/.config/monitors.xml"
+    "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
   ];
 
   # Plymouth boot splash (smoother boot + login transitions)
