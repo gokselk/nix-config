@@ -19,14 +19,14 @@
   # GNOME Desktop
   services.desktopManager.gnome.enable = true;
 
-  # Disable GNOME bloat but keep essential session services
-  services.gnome.core-apps.enable = false;
-  services.gnome.core-developer-tools.enable = false;
-  services.gnome.games.enable = false;
+  # Set experimental-features globally (required for GDM compatibility with fractional scaling)
+  # Without this, monitors.xml is incompatible between GDM and user session, causing flicker
+  programs.dconf.profiles.gdm.databases = [{
+    settings."org/gnome/mutter".experimental-features = [ "scale-monitor-framebuffer" "xwayland-native-scaling" ];
+  }];
 
-  # Essential session services (needed for smooth login)
-  services.gnome.gnome-keyring.enable = true;
-  programs.seahorse.enable = false;  # Keyring without GUI
+  # Disable GNOME games
+  services.gnome.games.enable = false;
 
   # GNOME Remote Desktop (RDP server)
   # Note: Must also enable in Settings → Sharing → Remote Desktop after first login
