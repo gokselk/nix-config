@@ -2,6 +2,11 @@
 # Minimal GNOME with Remote Desktop (RDP) support
 { config, lib, pkgs, ... }:
 {
+  # Apply user display settings to GDM login screen
+  systemd.tmpfiles.rules = [
+    "d /run/gdm/.config 0711 gdm gdm -"
+    "L+ /run/gdm/.config/monitors.xml - - - - /home/goksel/.config/monitors.xml"
+  ];
   # GDM Display Manager (Wayland)
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
