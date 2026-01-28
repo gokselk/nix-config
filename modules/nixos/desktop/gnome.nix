@@ -3,9 +3,10 @@
 { config, lib, pkgs, ... }:
 {
   # Apply user display settings to GDM login screen
+  # Copy instead of symlink because gdm user can't read /home/goksel
   systemd.tmpfiles.rules = [
     "d /run/gdm/.config 0711 gdm gdm -"
-    "L+ /run/gdm/.config/monitors.xml - - - - /home/goksel/.config/monitors.xml"
+    "C+ /run/gdm/.config/monitors.xml 0644 gdm gdm - /home/goksel/.config/monitors.xml"
   ];
 
   # Plymouth boot splash (smoother boot + login transitions)
