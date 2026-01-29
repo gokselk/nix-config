@@ -4,7 +4,7 @@
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
-    defaultSopsFile = ../../../secrets/system/secrets.yaml;
+    defaultSopsFile = ../../../secrets/hosts/common/secrets.yaml;
 
     age = {
       # Use SSH host key converted to age (solves chicken-egg problem)

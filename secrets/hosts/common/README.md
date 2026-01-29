@@ -6,7 +6,7 @@ SOPS-encrypted secrets for NixOS system configuration.
 
 Edit secrets:
 ```bash
-just secrets-edit secrets/system/secrets.yaml
+just secrets-edit secrets/hosts/common/secrets.yaml
 ```
 
 Re-encrypt after key changes:
