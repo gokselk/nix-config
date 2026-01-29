@@ -12,14 +12,14 @@ keys:
   - &hl-node01 age1qene8xdfrnyxc68s60rt6rqtq4rxnd6fnhwxxg3fns7gt46ypqsqfdapa0
 
 creation_rules:
-  # NixOS system secrets (encrypt to both user + host)
-  - path_regex: secrets/.*\.yaml$
+  # System secrets (encrypt to user + host)
+  - path_regex: secrets/system/.*\.yaml$
     key_groups:
       - age:
           - *goksel
           - *hl-node01
 
-  # Home-manager user secrets (user key only)
+  # User secrets (encrypt to user only)
   - path_regex: secrets/user/.*\.yaml$
     key_groups:
       - age:
