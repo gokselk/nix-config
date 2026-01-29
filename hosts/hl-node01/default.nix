@@ -16,7 +16,6 @@
     ../../modules/nixos/networking/tailscale.nix
     ../../modules/nixos/storage
     ../../modules/nixos/secrets
-    ../../modules/nixos/desktop
   ];
 
   # Hostname
