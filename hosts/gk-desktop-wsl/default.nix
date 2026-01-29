@@ -26,7 +26,7 @@
   # Add development tools for WSL
   home-manager.users.goksel = { pkgs, ... }: {
     imports = [
-      ../../modules/home/profiles/development
+      ../../modules/home-manager/profiles/development
     ];
   };
 

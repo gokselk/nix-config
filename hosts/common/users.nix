@@ -24,10 +24,10 @@
   # Home-manager base configuration (profiles added per-host)
   home-manager.users.goksel = { pkgs, ... }: {
     imports = [
-      ../../modules/home/profiles/core
-      ../../modules/home/profiles/shell
-      ../../modules/home/profiles/cli
-      ../../modules/home/users/goksel
+      ../../modules/home-manager/profiles/core
+      ../../modules/home-manager/profiles/shell
+      ../../modules/home-manager/profiles/cli
+      ../../modules/home-manager/users/goksel
     ];
 
     home.stateVersion = "24.11";

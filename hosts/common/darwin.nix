@@ -22,12 +22,12 @@
   # Home-manager user configuration
   home-manager.users.goksel = { pkgs, ... }: {
     imports = [
-      ../../modules/home/profiles/core
-      ../../modules/home/profiles/shell
-      ../../modules/home/profiles/cli
-      ../../modules/home/profiles/development
-      ../../modules/home/profiles/darwin
-      ../../modules/home/users/goksel
+      ../../modules/home-manager/profiles/core
+      ../../modules/home-manager/profiles/shell
+      ../../modules/home-manager/profiles/cli
+      ../../modules/home-manager/profiles/development
+      ../../modules/home-manager/profiles/darwin
+      ../../modules/home-manager/users/goksel
     ];
 
     home.stateVersion = "24.11";
