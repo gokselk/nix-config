@@ -29,8 +29,8 @@ just host-key <hostname>      # Get host's age public key
 just gc                       # Garbage collect old generations
 just deploy <host>            # Deploy to remote host via SSH
 
-# Install
-./scripts/install.sh <hostname> <target-host>  # nixos-anywhere install
+# Install (ERASES DISK)
+just install <hostname> <target-host>  # nixos-anywhere install
 ```
 
 ## Architecture

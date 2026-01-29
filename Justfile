@@ -177,6 +177,25 @@ deploy host:
     @just _info "Deploying to {{host}}"
     nixos-rebuild switch --flake .#{{host}} --target-host {{host}} --use-remote-sudo
 
+[group('deploy')]
+[doc('Install NixOS on remote host (ERASES DISK)')]
+[confirm('This will ERASE ALL DATA on the target disk. Continue?')]
+install host target:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [[ ! -d "hosts/{{host}}" ]]; then
+        echo "Error: Host '{{host}}' not found"
+        echo "Available: $(ls -1 hosts/ | grep -v common | tr '\n' ' ')"
+        exit 1
+    fi
+    echo "Installing {{host}} to {{target}}..."
+    nix run github:nix-community/nixos-anywhere -- \
+        --flake .#{{host}} \
+        --target-host {{target}} \
+        --build-on remote
+    echo ""
+    echo "Done! Next: ssh goksel@<ip>, passwd, sudo tailscale up"
+
 # ─── Kubernetes / ArgoCD ──────────────────────────
 
 [group('k8s')]
