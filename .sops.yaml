@@ -1,14 +1,14 @@
 # SOPS configuration - uses age encryption
-# Local key: SSH key converted to age (just age-setup)
-# Server key: sops-nix generates at /var/lib/sops-nix/key.txt (just host-key)
+# User key: SSH key converted to age (just age-setup)
+# Host key: SSH host key converted to age (just host-key <hostname>)
 
 keys:
   # goksel's age key (from SSH key via ssh-to-age)
   - &goksel age1kz7n7l8rgu3cpwf5wyyleslanjnavglgmstvlfqmshw424mvpfssy4sy3y
 
-  # hl-node01's age key (derived from SSH host key via ssh-to-age)
+  # hl-node01's age key (from SSH host key via ssh-to-age)
   # Get with: just host-key hl-node01
-  # After reinstall: update this key and run `just secrets-update`
+  # After reinstall: update this key and run `just secrets-rekey`
   - &hl-node01 age1qene8xdfrnyxc68s60rt6rqtq4rxnd6fnhwxxg3fns7gt46ypqsqfdapa0
 
 creation_rules:
