@@ -20,7 +20,7 @@ creation_rules:
           - *hl-node01
 
   # Home-manager user secrets (user key only)
-  - path_regex: home/secrets/.*\.yaml$
+  - path_regex: secrets/home/.*\.yaml$
     key_groups:
       - age:
           - *goksel
