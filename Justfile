@@ -88,14 +88,6 @@ darwin-bootstrap host=hostname:
     echo "Installing nix-darwin for {{host}}..."
     nix run nix-darwin -- switch --flake .#{{host}}
 
-# ─── Home Manager ─────────────────────────────────
-
-[group('home')]
-[doc('Switch home-manager (optionally specify user@host)')]
-home target=(user + "@" + hostname):
-    @just _info "Switching home-manager for {{target}}"
-    home-manager switch --flake ./home#{{target}} --no-update-lock-file
-
 # ─── Flake ────────────────────────────────────────
 
 [group('flake')]
@@ -103,12 +95,6 @@ home target=(user + "@" + hostname):
 update *input:
     @just _info "Updating flake inputs{{ if input != '' { ': ' + input } else { '' } }}"
     nix flake update {{input}}
-
-[group('home')]
-[doc('Update home flake inputs (optionally specify input)')]
-home-update *input:
-    @just _info "Updating home flake inputs{{ if input != '' { ': ' + input } else { '' } }}"
-    nix flake update {{input}} --flake ./home
 
 [group('flake')]
 [doc('Show flake outputs')]
