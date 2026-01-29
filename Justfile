@@ -196,28 +196,6 @@ install host target:
     echo ""
     echo "Done! Next: ssh goksel@<ip>, passwd, sudo tailscale up"
 
-# ─── Kubernetes / ArgoCD ──────────────────────────
-
-[group('k8s')]
-[doc('Bootstrap ArgoCD (first-time setup)')]
-argocd-setup:
-    @just _info "Bootstrapping ArgoCD"
-    kubectl create namespace argocd || true
-    kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-    kubectl wait --for=condition=ready pod -l app.kubernetes.io/name=argocd-server -n argocd --timeout=300s
-    kubectl apply -f manifests/argocd/app-of-apps.yaml
-
-[group('k8s')]
-[doc('Get ArgoCD admin password')]
-argocd-password:
-    @kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
-
-[group('k8s')]
-[doc('Port-forward ArgoCD UI to localhost:8080')]
-argocd-ui:
-    @just _info "ArgoCD UI at https://localhost:8080"
-    kubectl port-forward svc/argocd-server -n argocd 8080:443
-
 # ─── ZFS ─────────────────────────────────────────
 
 [group('zfs')]
