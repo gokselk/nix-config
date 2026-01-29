@@ -114,8 +114,5 @@
           system = "aarch64-darwin";
         };
       };
-
-      # Expose for external use
-      overlays.default = import ./overlays;
     };
 }
