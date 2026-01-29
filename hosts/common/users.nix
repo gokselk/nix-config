@@ -20,4 +20,16 @@
 
   # Security: Allow wheel group to use sudo without password
   security.sudo.wheelNeedsPassword = false;
+
+  # Home-manager base configuration (profiles added per-host)
+  home-manager.users.goksel = { pkgs, ... }: {
+    imports = [
+      ../../home/profiles/core
+      ../../home/profiles/shell
+      ../../home/profiles/cli
+      ../../home/users/goksel
+    ];
+
+    home.stateVersion = "24.11";
+  };
 }
