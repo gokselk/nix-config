@@ -24,10 +24,3 @@ creation_rules:
     key_groups:
       - age:
           - *goksel
-
-  # Kubernetes secrets (encrypt to both for ksops on server)
-  - path_regex: manifests/.*secret.*\.yaml$
-    key_groups:
-      - age:
-          - *goksel
-          - *hl-node01
