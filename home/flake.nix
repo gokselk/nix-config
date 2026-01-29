@@ -49,36 +49,11 @@
     in
     {
       homeConfigurations = {
-        # Main homelab server
+        # Main homelab server (headless Incus host)
         "goksel@hl-node01" = mkHome {
           username = "goksel";
           system = "x86_64-linux";
           hostname = "hl-node01";
-          extraModules = [
-            ./profiles/development
-            ./profiles/gnome
-          ];
-        };
-
-        # NixOS WSL
-        "goksel@gk-desktop-wsl" = mkHome {
-          username = "goksel";
-          system = "x86_64-linux";
-          hostname = "gk-desktop-wsl";
-          extraModules = [
-            ./profiles/development
-          ];
-        };
-
-        # macOS - Personal MacBook Air M2
-        "goksel@gk-air" = mkHome {
-          username = "goksel";
-          system = "aarch64-darwin";
-          hostname = "gk-air";
-          extraModules = [
-            ./profiles/development
-            ./profiles/darwin
-          ];
         };
       };
     };
