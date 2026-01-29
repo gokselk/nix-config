@@ -24,9 +24,6 @@
   # AMD GPU support (Rembrandt has RDNA2 iGPU)
   hardware.amdgpu.initrd.enable = true;
 
-  # AMD Seamless Boot - avoid screen going black during boot (DCN 3.0+/RDNA2)
-  boot.kernelParams = [ "amdgpu.seamless=1" ];
-
   # Enable all redistributable firmware
   hardware.enableRedistributableFirmware = true;
 
