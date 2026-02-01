@@ -39,4 +39,9 @@
 
   # System state version (do not change after install)
   system.stateVersion = "24.11";
+
+  # Add Hyprland home-manager profile
+  home-manager.users.goksel.imports = [
+    ../../modules/home-manager/profiles/hyprland
+  ];
 }
