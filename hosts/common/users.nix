@@ -34,6 +34,7 @@
         ../../modules/home-manager/profiles/core
         ../../modules/home-manager/profiles/shell
         ../../modules/home-manager/profiles/cli
+        ../../modules/home-manager/profiles/development
         ../../modules/home-manager/users/goksel
       ];
 
