@@ -9,7 +9,7 @@ keys:
   # hl-node01's age key (from SSH host key via ssh-to-age)
   # Get with: just host-key hl-node01
   # After reinstall: update this key and run `just secrets-rekey`
-  - &hl-node01 age1qene8xdfrnyxc68s60rt6rqtq4rxnd6fnhwxxg3fns7gt46ypqsqfdapa0
+  - &hl-node01 age1mwa0pc8hu6cnz36duaq6rt7afu0xfvzm7h5lvznrxdk0q8zdm3sszcw9zf
 
 creation_rules:
   # Host secrets (encrypt to user + hosts)
