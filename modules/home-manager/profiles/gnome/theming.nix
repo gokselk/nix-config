@@ -1,6 +1,11 @@
 # GNOME theming
 # Catppuccin, GTK, Qt, cursor, and terminal
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Terminal: kitty
   programs.kitty = {

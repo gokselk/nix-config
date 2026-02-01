@@ -1,6 +1,5 @@
 # Homebrew Casks (GUI applications)
-_:
-{
+_: {
   homebrew.casks = [
     # Browser
     "brave-browser"

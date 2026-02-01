@@ -1,5 +1,10 @@
 # Bootloader configuration
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # Use systemd-boot for UEFI systems
   boot.loader.systemd-boot.enable = true;

@@ -1,6 +1,5 @@
 # Bash configuration
-_:
-{
+_: {
   programs.bash = {
     enable = true;
     enableCompletion = true;

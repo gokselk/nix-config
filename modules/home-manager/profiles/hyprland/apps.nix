@@ -1,6 +1,11 @@
 # Desktop applications
 # Packages, session variables, XDG, mpv
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Wayland utilities and desktop applications
   home.packages = with pkgs; [
@@ -17,11 +22,11 @@
     yazi
 
     # Viewers
-    zathura      # PDF/DJVU
-    imv          # Images
+    zathura # PDF/DJVU
+    imv # Images
 
     # Archive tools
-    ouch        # Modern wrapper
+    ouch # Modern wrapper
     p7zip
     unrar
 
@@ -51,7 +56,7 @@
 
     # Documents
     typst
-    tinymist        # Typst LSP
+    tinymist # Typst LSP
 
     # Productivity
     obsidian
@@ -60,9 +65,9 @@
     obs-studio
 
     # Fonts
-    corefonts      # Arial, Times New Roman, Courier New, etc.
-    vista-fonts    # Calibri, Cambria, Consolas, etc.
-    inter          # Modern UI font
+    corefonts # Arial, Times New Roman, Courier New, etc.
+    vista-fonts # Calibri, Cambria, Consolas, etc.
+    inter # Modern UI font
 
     # Utilities
     qbittorrent-enhanced

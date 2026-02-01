@@ -44,8 +44,8 @@
 
         # Pool-level options
         options = {
-          ashift = "12";       # 4K sector alignment
-          autotrim = "on";     # SSD TRIM support
+          ashift = "12"; # 4K sector alignment
+          autotrim = "on"; # SSD TRIM support
         };
 
         # Root filesystem options (inherited by datasets)

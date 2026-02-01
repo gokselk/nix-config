@@ -1,6 +1,5 @@
 # Firewall configuration
-_:
-{
+_: {
   # Use nftables (modern firewall backend)
   networking.nftables.enable = true;
 
@@ -9,7 +8,7 @@ _:
 
     # Default: deny all incoming, allow all outgoing
     allowedTCPPorts = [
-      22    # SSH
+      22 # SSH
     ];
 
     allowedUDPPorts = [

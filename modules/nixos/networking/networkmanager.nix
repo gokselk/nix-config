@@ -1,6 +1,5 @@
 # NetworkManager configuration (for desktops)
-_:
-{
+_: {
   networking.networkmanager.enable = true;
 
   # Enable nftables (modern firewall backend)

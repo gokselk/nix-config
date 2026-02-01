@@ -1,11 +1,16 @@
 # Kubernetes tools
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   home.packages = with pkgs; [
     kubectl
     kubernetes-helm
     k9s
-    stern         # Multi-pod log tailing
-    kubectx       # Context/namespace switching
+    stern # Multi-pod log tailing
+    kubectx # Context/namespace switching
   ];
 }

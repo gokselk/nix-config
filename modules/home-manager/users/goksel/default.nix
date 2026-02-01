@@ -1,12 +1,14 @@
 # User-specific configuration for goksel
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Home directory (auto-detected based on system)
   home.username = "goksel";
-  home.homeDirectory =
-    if pkgs.stdenv.isDarwin
-    then "/Users/goksel"
-    else "/home/goksel";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/goksel" else "/home/goksel";
 
   # User-specific packages
   home.packages = with pkgs; [

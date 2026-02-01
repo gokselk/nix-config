@@ -1,6 +1,11 @@
 # Hyprland desktop environment profile
 # Wayland compositor with full desktop stack
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./compositor.nix

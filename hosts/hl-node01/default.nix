@@ -1,6 +1,12 @@
 # hl-node01 - Main homelab server
 # Nipogi E3B: AMD Ryzen 6800H, 16GB RAM, 500GB SSD
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   imports = [
     # Host-specific

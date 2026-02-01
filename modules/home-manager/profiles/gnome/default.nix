@@ -1,6 +1,11 @@
 # GNOME home-manager profile
 # dconf settings for usability + RDP
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./theming.nix
@@ -25,8 +30,14 @@
     # Keyboard layouts
     "org/gnome/desktop/input-sources" = {
       sources = [
-        (lib.hm.gvariant.mkTuple [ "xkb" "us" ])
-        (lib.hm.gvariant.mkTuple [ "xkb" "tr" ])
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "us"
+        ])
+        (lib.hm.gvariant.mkTuple [
+          "xkb"
+          "tr"
+        ])
       ];
       xkb-options = [ "grp:win_space_toggle" ];
     };
@@ -44,7 +55,10 @@
       # Enable fractional scaling (125%, 150%, 175%, etc.)
       # scale-monitor-framebuffer: Wayland fractional scaling
       # xwayland-native-scaling: XWayland apps render at native scale (GNOME 47+)
-      experimental-features = [ "scale-monitor-framebuffer" "xwayland-native-scaling" ];
+      experimental-features = [
+        "scale-monitor-framebuffer"
+        "xwayland-native-scaling"
+      ];
     };
 
     # Keybindings

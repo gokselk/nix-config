@@ -1,6 +1,11 @@
 # Desktop environment module
 # GNOME with Remote Desktop (RDP) support
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./graphics.nix

@@ -42,7 +42,18 @@
     };
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, nix-darwin, nixos-wsl, sops-nix, catppuccin, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      disko,
+      home-manager,
+      nix-darwin,
+      nixos-wsl,
+      sops-nix,
+      catppuccin,
+      ...
+    }@inputs:
     let
       # Common home-manager settings
       homeManagerConfig = {
@@ -57,7 +68,12 @@
       };
 
       # Helper function to create NixOS configurations
-      mkHost = { hostname, system ? "x86_64-linux", extraModules ? [] }:
+      mkHost =
+        {
+          hostname,
+          system ? "x86_64-linux",
+          extraModules ? [ ],
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
@@ -70,11 +86,17 @@
             homeManagerConfig
             ./hosts/common
             ./hosts/${hostname}
-          ] ++ extraModules;
+          ]
+          ++ extraModules;
         };
 
       # Helper function to create Darwin (macOS) configurations
-      mkDarwin = { hostname, system ? "aarch64-darwin", extraModules ? [] }:
+      mkDarwin =
+        {
+          hostname,
+          system ? "aarch64-darwin",
+          extraModules ? [ ],
+        }:
         nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = {
@@ -89,10 +111,20 @@
             ./modules/darwin/system
             ./modules/darwin/homebrew
             ./hosts/${hostname}
-          ] ++ extraModules;
+          ]
+          ++ extraModules;
         };
+      # Systems to generate formatters for
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
     in
     {
+      # Formatter for `nix fmt`
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+
       nixosConfigurations = {
         # Main homelab server: Nipogi E3B (AMD Ryzen 6800H)
         hl-node01 = mkHost {

@@ -1,6 +1,5 @@
 # OpenSSH configuration
-_:
-{
+_: {
   services.openssh = {
     enable = true;
 

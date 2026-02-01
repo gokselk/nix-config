@@ -1,9 +1,14 @@
 # Cloud and infrastructure tools
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   home.packages = with pkgs; [
     # Infrastructure as Code
-    opentofu      # Open source Terraform fork
+    opentofu # Open source Terraform fork
     ansible
 
     # Cloud CLIs

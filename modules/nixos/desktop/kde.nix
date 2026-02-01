@@ -1,5 +1,10 @@
 # KDE Plasma desktop with RDP for remote access
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # KDE Plasma Desktop Environment (Wayland)
   services.displayManager.sddm = {

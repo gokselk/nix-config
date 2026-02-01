@@ -1,7 +1,6 @@
 # Network configuration for hl-node01
 # Bridge for VM/container networking
-_:
-{
+_: {
   networking.useDHCP = false;
 
   # Enable systemd-resolved for proper DNS integration with Tailscale
@@ -14,7 +13,7 @@ _:
   };
 
   networking.interfaces.vmbr0 = {
-    useDHCP = true;  # Static DHCP lease on router
+    useDHCP = true; # Static DHCP lease on router
   };
 
   # Disable wireless

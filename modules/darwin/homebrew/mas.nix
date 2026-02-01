@@ -1,6 +1,5 @@
 # Mac App Store applications
-_:
-{
+_: {
   homebrew.masApps = {
     "WireGuard" = 1451685025;
   };

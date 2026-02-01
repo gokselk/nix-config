@@ -1,18 +1,35 @@
 # Waybar configuration
 # Status bar for Hyprland
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = true;  # Managed by uwsm/systemd
+    systemd.enable = true; # Managed by uwsm/systemd
     settings = {
       mainBar = {
         layer = "top";
         position = "top";
         height = 30;
-        modules-left = [ "hyprland/workspaces" "hyprland/window" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "hyprland/window"
+        ];
         modules-center = [ "clock" ];
-        modules-right = [ "hyprland/language" "pulseaudio" "network" "cpu" "memory" "battery" "custom/notification" "tray" ];
+        modules-right = [
+          "hyprland/language"
+          "pulseaudio"
+          "network"
+          "cpu"
+          "memory"
+          "battery"
+          "custom/notification"
+          "tray"
+        ];
 
         "hyprland/workspaces" = {
           format = "{icon}";
@@ -44,7 +61,11 @@
         pulseaudio = {
           format = "{icon} {volume}%";
           format-muted = " ";
-          format-icons.default = [ "" "" "" ];
+          format-icons.default = [
+            ""
+            ""
+            ""
+          ];
           on-click = "pavucontrol";
         };
 
@@ -54,7 +75,13 @@
             critical = 15;
           };
           format = "{icon} {capacity}%";
-          format-icons = [ "" "" "" "" "" ];
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
         };
 
         "custom/notification" = {

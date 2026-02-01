@@ -1,5 +1,11 @@
 # Common Darwin configuration shared across all Macs
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   # Timezone
   time.timeZone = "Europe/Istanbul";
@@ -20,16 +26,18 @@
   };
 
   # Home-manager user configuration
-  home-manager.users.goksel = { pkgs, ... }: {
-    imports = [
-      ../../modules/home-manager/profiles/core
-      ../../modules/home-manager/profiles/shell
-      ../../modules/home-manager/profiles/cli
-      ../../modules/home-manager/profiles/development
-      ../../modules/home-manager/profiles/darwin
-      ../../modules/home-manager/users/goksel
-    ];
+  home-manager.users.goksel =
+    { pkgs, ... }:
+    {
+      imports = [
+        ../../modules/home-manager/profiles/core
+        ../../modules/home-manager/profiles/shell
+        ../../modules/home-manager/profiles/cli
+        ../../modules/home-manager/profiles/development
+        ../../modules/home-manager/profiles/darwin
+        ../../modules/home-manager/users/goksel
+      ];
 
-    home.stateVersion = "24.11";
-  };
+      home.stateVersion = "24.11";
+    };
 }

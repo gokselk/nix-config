@@ -1,5 +1,10 @@
 # Core NixOS configuration module
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./nix.nix

@@ -1,5 +1,10 @@
 # macOS Dock configuration
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   system.defaults.dock = {
     autohide = true;
@@ -9,10 +14,10 @@
     launchanim = false;
     mineffect = "scale";
     minimize-to-application = true;
-    mru-spaces = false;  # Don't rearrange spaces based on recent use
+    mru-spaces = false; # Don't rearrange spaces based on recent use
     orientation = "bottom";
     show-recents = false;
-    showhidden = true;  # Dim hidden app icons
+    showhidden = true; # Dim hidden app icons
     static-only = false;
     tilesize = 48;
 

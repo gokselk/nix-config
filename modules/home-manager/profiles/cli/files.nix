@@ -2,6 +2,6 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    yazi      # Terminal file manager
+    yazi # Terminal file manager
   ];
 }

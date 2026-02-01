@@ -1,6 +1,12 @@
 # Development profile
 # Tools for software development and DevOps
-{ config, pkgs, lib, inputs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   imports = [
     ./kubernetes.nix
@@ -10,11 +16,11 @@
 
   home.packages = with pkgs; [
     # Development utilities
-    lazydocker    # Terminal UI for docker
-    delta         # Better git diffs
-    httpie        # HTTP client
-    usql          # Universal SQL client
-    tokei         # Code statistics
+    lazydocker # Terminal UI for docker
+    delta # Better git diffs
+    httpie # HTTP client
+    usql # Universal SQL client
+    tokei # Code statistics
   ];
 
   # Direnv integration

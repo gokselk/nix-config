@@ -1,6 +1,11 @@
 # Essential system packages
 # User CLI tools (htop, ripgrep, jq, etc) are in home-manager
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     # Core utilities
@@ -21,7 +26,7 @@
 
     # Nix utilities
     home-manager
-    just        # Task runner (see Justfile)
+    just # Task runner (see Justfile)
   ];
 
   # Enable vim as default editor

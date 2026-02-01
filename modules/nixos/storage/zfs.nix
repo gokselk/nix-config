@@ -1,5 +1,10 @@
 # ZFS configuration module
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   # Find the latest ZFS-compatible kernel
   zfsCompatibleKernelPackages = lib.filterAttrs (
@@ -27,11 +32,11 @@ in
   # Automatic snapshots with zfs-auto-snapshot
   services.zfs.autoSnapshot = {
     enable = true;
-    frequent = 4;    # Keep 4 x 15-minute snapshots
-    hourly = 24;     # Keep 24 hourly snapshots
-    daily = 7;       # Keep 7 daily snapshots
-    weekly = 4;      # Keep 4 weekly snapshots
-    monthly = 12;    # Keep 12 monthly snapshots
+    frequent = 4; # Keep 4 x 15-minute snapshots
+    hourly = 24; # Keep 24 hourly snapshots
+    daily = 7; # Keep 7 daily snapshots
+    weekly = 4; # Keep 4 weekly snapshots
+    monthly = 12; # Keep 12 monthly snapshots
   };
 
   # Automatic scrub for data integrity

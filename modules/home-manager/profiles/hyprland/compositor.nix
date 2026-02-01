@@ -1,10 +1,15 @@
 # Hyprland compositor configuration
 # Window manager settings, keybindings, and environment
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = false;  # uwsm manages systemd integration
+    systemd.enable = false; # uwsm manages systemd integration
 
     settings = {
       # Monitor configuration - highrr prefers highest refresh rate, auto scale for 4K

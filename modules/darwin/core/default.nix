@@ -1,5 +1,10 @@
 # Darwin core modules
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./nix.nix

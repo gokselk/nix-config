@@ -1,6 +1,11 @@
 # Desktop services
 # Notifications (mako), screen lock (hyprlock), idle daemon (hypridle), wallpaper (hyprpaper)
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Wallpaper: hyprpaper
   services.hyprpaper = {
@@ -90,25 +95,29 @@
         hide_cursor = true;
         grace = 5;
       };
-      background = [{
-        monitor = "";
-        path = "screenshot";
-        blur_passes = 3;
-        blur_size = 8;
-      }];
-      input-field = [{
-        monitor = "";
-        size = "200, 50";
-        outline_thickness = 3;
-        dots_size = 0.33;
-        dots_spacing = 0.15;
-        outer_color = "rgb(89, 180, 250)";
-        inner_color = "rgb(30, 30, 46)";
-        font_color = "rgb(205, 214, 244)";
-        fade_on_empty = true;
-        placeholder_text = "<i>Enter Password...</i>";
-        hide_input = false;
-      }];
+      background = [
+        {
+          monitor = "";
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+      input-field = [
+        {
+          monitor = "";
+          size = "200, 50";
+          outline_thickness = 3;
+          dots_size = 0.33;
+          dots_spacing = 0.15;
+          outer_color = "rgb(89, 180, 250)";
+          inner_color = "rgb(30, 30, 46)";
+          font_color = "rgb(205, 214, 244)";
+          fade_on_empty = true;
+          placeholder_text = "<i>Enter Password...</i>";
+          hide_input = false;
+        }
+      ];
     };
   };
 
@@ -123,11 +132,11 @@
       };
       listener = [
         {
-          timeout = 300;  # 5 minutes
+          timeout = 300; # 5 minutes
           on-timeout = "hyprlock";
         }
         {
-          timeout = 600;  # 10 minutes
+          timeout = 600; # 10 minutes
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }

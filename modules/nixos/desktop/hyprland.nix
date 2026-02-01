@@ -1,5 +1,10 @@
 # Hyprland compositor with uwsm session management
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   tuigreet = "${pkgs.tuigreet}/bin/tuigreet";
   sessions = "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
@@ -34,7 +39,7 @@ in
   # greetd with tuigreet
   services.greetd = {
     enable = true;
-    useTextGreeter = true;  # Prevents systemd messages from overwriting TUI
+    useTextGreeter = true; # Prevents systemd messages from overwriting TUI
     settings.default_session = {
       command = "${tuigreet} --time --remember --remember-session --sessions ${sessions}";
       user = "greeter";
@@ -42,7 +47,7 @@ in
   };
 
   # PAM for screen locking (hyprlock)
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   # Polkit for privilege escalation dialogs
   security.polkit.enable = true;

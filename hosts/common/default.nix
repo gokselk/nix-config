@@ -1,5 +1,10 @@
 # Common configuration shared across all hosts
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./users.nix

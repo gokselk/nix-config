@@ -18,3 +18,9 @@ jobs:
 
       - name: Check flake
         run: nix flake check --no-build
+
+      - name: Check formatting
+        run: nix fmt -- --check .
+
+      - name: Lint with statix
+        run: nix run nixpkgs#statix -- check . || true

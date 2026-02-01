@@ -1,7 +1,6 @@
 # Homebrew Formulae (CLI tools)
-_:
-{
+_: {
   homebrew.brews = [
-    "mas"  # Mac App Store CLI
+    "mas" # Mac App Store CLI
   ];
 }

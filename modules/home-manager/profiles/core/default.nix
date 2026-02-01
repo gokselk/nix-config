@@ -1,6 +1,11 @@
 # Core home-manager configuration
 # Foundational settings for all users/systems
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./git.nix

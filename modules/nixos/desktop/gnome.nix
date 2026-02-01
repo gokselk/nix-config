@@ -1,6 +1,11 @@
 # GNOME Desktop Environment
 # Minimal GNOME with Remote Desktop (RDP) support
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   # GDM monitors.xml - inline to avoid pure eval issues
@@ -52,9 +57,14 @@ in
 
   # Set experimental-features globally (required for GDM compatibility with fractional scaling)
   # Without this, monitors.xml is incompatible between GDM and user session, causing flicker
-  programs.dconf.profiles.gdm.databases = [{
-    settings."org/gnome/mutter".experimental-features = [ "scale-monitor-framebuffer" "xwayland-native-scaling" ];
-  }];
+  programs.dconf.profiles.gdm.databases = [
+    {
+      settings."org/gnome/mutter".experimental-features = [
+        "scale-monitor-framebuffer"
+        "xwayland-native-scaling"
+      ];
+    }
+  ];
 
   # Disable GNOME games
   services.gnome.games.enable = false;

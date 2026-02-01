@@ -1,17 +1,29 @@
 # Nix daemon and flake settings for Darwin
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   nix = {
     settings = {
       # Enable flakes and new nix command
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
       # Optimize store automatically
       auto-optimise-store = true;
 
       # Allow trusted users to use substituters
       # Darwin uses @admin group instead of @wheel
-      trusted-users = [ "root" "@admin" "goksel" ];
+      trusted-users = [
+        "root"
+        "@admin"
+        "goksel"
+      ];
 
       # Use binary caches
       substituters = [
@@ -27,7 +39,11 @@
     # Garbage collection (Darwin syntax)
     gc = {
       automatic = true;
-      interval = { Weekday = 0; Hour = 2; Minute = 0; };  # Sunday 2 AM
+      interval = {
+        Weekday = 0;
+        Hour = 2;
+        Minute = 0;
+      }; # Sunday 2 AM
       options = "--delete-older-than 30d";
     };
   };

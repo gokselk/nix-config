@@ -1,6 +1,11 @@
 # Hyprland theming
 # Catppuccin, GTK, Qt, cursor, and terminal
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Terminal: ghostty
   programs.ghostty = {

@@ -1,5 +1,10 @@
 # Shell configuration
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./bash.nix

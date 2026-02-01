@@ -1,5 +1,10 @@
 # Darwin system configuration modules
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./defaults.nix

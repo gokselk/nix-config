@@ -1,5 +1,11 @@
 # SOPS-nix secrets management
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
@@ -15,7 +21,7 @@
 
     # Define secrets to decrypt
     secrets = {
-      "tailscale/authkey" = {};
+      "tailscale/authkey" = { };
     };
   };
 }

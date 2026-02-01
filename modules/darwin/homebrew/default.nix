@@ -13,7 +13,7 @@
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-      cleanup = "zap";  # Remove unlisted casks/formulae
+      cleanup = "zap"; # Remove unlisted casks/formulae
     };
 
     global = {

@@ -1,16 +1,27 @@
 # Nix daemon and flake settings
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   nix = {
     settings = {
       # Enable flakes and new nix command
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
       # Optimize store automatically
       auto-optimise-store = true;
 
       # Allow trusted users to use substituters
-      trusted-users = [ "root" "@wheel" ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
 
       # Use binary caches
       substituters = [

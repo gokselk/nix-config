@@ -1,5 +1,10 @@
 # Incus virtualization configuration
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   virtualisation.incus = {
     enable = true;
@@ -77,7 +82,10 @@
   networking.nftables.enable = true;
 
   # Firewall rules for bridges
-  networking.firewall.trustedInterfaces = [ "incusbr0" "vmbr0" ];
+  networking.firewall.trustedInterfaces = [
+    "incusbr0"
+    "vmbr0"
+  ];
 
   # Incus CLI
   environment.systemPackages = [ pkgs.incus ];

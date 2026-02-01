@@ -1,5 +1,10 @@
 # macOS-specific home-manager configuration
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # Disable Linux-only XDG user directories
   xdg.userDirs.enable = lib.mkForce false;
@@ -7,7 +12,7 @@
   # macOS-specific packages
   home.packages = with pkgs; [
     # Darwin utilities
-    darwin.trash  # Move to trash from CLI
+    darwin.trash # Move to trash from CLI
   ];
 
   # macOS-specific shell aliases

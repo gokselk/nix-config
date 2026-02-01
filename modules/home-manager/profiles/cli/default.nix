@@ -1,6 +1,11 @@
 # CLI tools and utilities
 # Starship prompt and common command-line tools
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ./files.nix
@@ -31,7 +36,7 @@
     # File viewing
     tree
     bat
-    eza        # Modern ls replacement
+    eza # Modern ls replacement
 
     # System info
     fastfetch

@@ -1,13 +1,18 @@
 # macOS system defaults
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   system.defaults = {
     NSGlobalDomain = {
       # Keyboard
-      AppleKeyboardUIMode = 3;  # Full keyboard access
-      ApplePressAndHoldEnabled = false;  # Key repeat instead of accent menu
-      InitialKeyRepeat = 15;  # Delay before key repeat
-      KeyRepeat = 2;  # Key repeat speed
+      AppleKeyboardUIMode = 3; # Full keyboard access
+      ApplePressAndHoldEnabled = false; # Key repeat instead of accent menu
+      InitialKeyRepeat = 15; # Delay before key repeat
+      KeyRepeat = 2; # Key repeat speed
 
       # Mouse/Trackpad
       AppleShowScrollBars = "WhenScrolling";
@@ -20,7 +25,7 @@
       NSAutomaticSpellingCorrectionEnabled = false;
 
       # Interface
-      AppleInterfaceStyle = "Dark";  # Dark mode
+      AppleInterfaceStyle = "Dark"; # Dark mode
       AppleShowAllExtensions = true;
 
       # Expand save/print panels by default
@@ -48,7 +53,7 @@
 
     # Trackpad
     trackpad = {
-      Clicking = true;  # Tap to click
+      Clicking = true; # Tap to click
       TrackpadRightClick = true;
       TrackpadThreeFingerDrag = true;
     };

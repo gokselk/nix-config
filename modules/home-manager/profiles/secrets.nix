@@ -1,6 +1,11 @@
 # User secrets via sops-nix
 # For user-specific secrets like API tokens, SSH keys, etc.
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   sops = {
     # Use SSH key converted to age format
