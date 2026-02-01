@@ -59,18 +59,12 @@
     # Utilities
     qbittorrent-enhanced
     bitwarden-desktop
-
-    # KDE apps
-    kdePackages.okular      # PDF/document viewer
-    kdePackages.dolphin     # File manager
-    kdePackages.gwenview    # Image viewer
-    kdePackages.ark         # Archive manager
   ];
 
   # Desktop environment variables
   home.sessionVariables = {
     BROWSER = "brave";
-    TERMINAL = "kitty";
+    TERMINAL = "ghostty";
   };
 
   # mpv with gpu-next, vulkan, hq profile

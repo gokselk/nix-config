@@ -2,17 +2,15 @@
 # Catppuccin, GTK, Qt, cursor, and terminal
 { config, pkgs, lib, ... }:
 {
-  # Terminal: kitty
-  programs.kitty = {
+  # Terminal: ghostty
+  programs.ghostty = {
     enable = true;
-    font = {
-      name = "JetBrainsMono Nerd Font";
-      size = 11;
-    };
     settings = {
-      window_padding_width = 10;
-      confirm_os_window_close = 0;
-      enable_audio_bell = false;
+      font-family = "JetBrainsMono Nerd Font";
+      font-size = 11;
+      window-padding-x = 10;
+      window-padding-y = 10;
+      confirm-close-surface = false;
     };
   };
 
@@ -20,7 +18,7 @@
   catppuccin = {
     flavor = "mocha";
     accent = "blue";
-    kitty.enable = true;
+    ghostty.enable = true;
   };
 
   # GTK settings
@@ -41,11 +39,11 @@
   # Tell apps to use dark mode via portal
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
-  # Qt theming (Breeze Dark)
+  # Qt theming (Adwaita Dark)
   qt = {
     enable = true;
-    platformTheme.name = "kde";
-    style.name = "breeze-dark";
+    platformTheme.name = "adwaita";
+    style.name = "adwaita-dark";
   };
 
   # Cursor theme
