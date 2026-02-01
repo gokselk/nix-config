@@ -18,6 +18,15 @@
   # AMD KVM virtualization support
   boot.kernelModules = [ "kvm-amd" ];
 
+  # Blacklist AMD Sensor Fusion Hub (not needed, causes errors)
+  boot.blacklistedKernelModules = [ "pcie_mp2_amd" ];
+
+  # Zram swap (compressed RAM swap)
+  zramSwap = {
+    enable = true;
+    memoryPercent = 25;
+  };
+
   # AMD CPU microcode updates
   hardware.cpu.amd.updateMicrocode = true;
 
