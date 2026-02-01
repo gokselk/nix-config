@@ -12,7 +12,7 @@
         height = 30;
         modules-left = [ "hyprland/workspaces" "hyprland/window" ];
         modules-center = [ "clock" ];
-        modules-right = [ "hyprland/language" "pulseaudio" "network" "cpu" "memory" "battery" "tray" ];
+        modules-right = [ "hyprland/language" "pulseaudio" "network" "cpu" "memory" "battery" "custom/notification" "tray" ];
 
         "hyprland/workspaces" = {
           format = "{icon}";
@@ -57,6 +57,22 @@
           format-icons = [ "" "" "" "" "" ];
         };
 
+        "custom/notification" = {
+          tooltip = false;
+          format = "{icon}";
+          format-icons = {
+            notification = "󱅫";
+            none = "󰂚";
+            dnd-notification = "󰂛";
+            dnd-none = "󰂛";
+          };
+          return-type = "json";
+          exec = "swaync-client -swb";
+          on-click = "swaync-client -t -sw";
+          on-click-right = "swaync-client -d -sw";
+          escape = true;
+        };
+
         tray.spacing = 10;
       };
     };
@@ -91,9 +107,13 @@
         margin: 4px 4px;
       }
 
-      #clock, #battery, #cpu, #memory, #network, #pulseaudio, #tray {
+      #clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-notification, #tray {
         padding: 0 10px;
         margin: 0 4px;
+      }
+
+      #custom-notification.notification {
+        color: #f38ba8;
       }
     '';
   };
