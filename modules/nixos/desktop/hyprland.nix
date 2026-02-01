@@ -37,6 +37,7 @@ in
   # greetd with tuigreet
   services.greetd = {
     enable = true;
+    vt = 2;  # Use VT2 to avoid kernel message spam on VT1
     settings.default_session = {
       command = "${tuigreet} --time --remember --remember-session --sessions ${sessions}";
       user = "greeter";
