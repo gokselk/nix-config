@@ -21,6 +21,7 @@
     imv          # Images
 
     # Archive tools
+    ouch        # Modern wrapper
     p7zip
     unrar
 
