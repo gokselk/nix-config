@@ -22,9 +22,6 @@ let
   };
 in
 {
-  # Silence kernel console messages after boot (keeps boot verbose, stops spam on tuigreet)
-  boot.consoleLogLevel = 0;
-
   # Brave browser policies (must be in /etc for Linux)
   environment.etc."brave/policies/managed/policies.json".text = builtins.toJSON bravePolicy;
   # Hyprland with built-in uwsm integration (NixOS 24.11+)
