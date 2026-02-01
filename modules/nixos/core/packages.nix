@@ -29,4 +29,7 @@
     enable = true;
     defaultEditor = true;
   };
+
+  # Allow running unpatched dynamic binaries (e.g., Claude Code)
+  programs.nix-ld.enable = true;
 }
