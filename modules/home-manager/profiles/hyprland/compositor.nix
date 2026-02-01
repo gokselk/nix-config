@@ -92,6 +92,9 @@
         # Clipboard history
         "$mod SHIFT, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
 
+        # Notification center
+        "$mod, N, exec, swaync-client -t -sw"
+
         # Move focus (arrows)
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"

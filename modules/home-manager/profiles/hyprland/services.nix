@@ -38,19 +38,48 @@
     };
     Install.WantedBy = [ "graphical-session.target" ];
   };
-  # Notifications: mako
-  services.mako = {
+  # Notifications: swaync (notification center with drawer)
+  services.swaync = {
     enable = true;
     settings = {
-      font = "JetBrainsMono Nerd Font 10";
-      background-color = "#1e1e2e";
-      text-color = "#cdd6f4";
-      border-color = "#89b4fa";
-      border-radius = 10;
-      border-size = 2;
-      default-timeout = 5000;
-      layer = "overlay";
+      positionX = "right";
+      positionY = "top";
+      control-center-margin-top = 10;
+      control-center-margin-right = 10;
+      notification-icon-size = 48;
+      notification-body-image-height = 100;
+      notification-body-image-width = 200;
+      timeout = 5;
+      timeout-low = 3;
+      timeout-critical = 0;
+      fit-to-screen = true;
+      control-center-width = 400;
+      notification-window-width = 400;
     };
+    style = ''
+      * {
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 13px;
+      }
+
+      .notification {
+        background-color: #1e1e2e;
+        color: #cdd6f4;
+        border: 2px solid #89b4fa;
+        border-radius: 10px;
+      }
+
+      .control-center {
+        background-color: #1e1e2e;
+        color: #cdd6f4;
+        border: 2px solid #89b4fa;
+        border-radius: 10px;
+      }
+
+      .notification-content {
+        margin: 10px;
+      }
+    '';
   };
 
   # Screen lock: hyprlock
