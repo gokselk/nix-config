@@ -20,6 +20,9 @@
     MANPAGER = "nvim +Man!";
   };
 
+  # Add ~/.local/bin to PATH (for user-installed binaries like Claude Code)
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
   # XDG directories
   xdg = {
     enable = true;
