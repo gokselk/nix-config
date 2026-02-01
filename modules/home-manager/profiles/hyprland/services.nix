@@ -1,7 +1,15 @@
 # Desktop services
-# Notifications (mako), screen lock (hyprlock), idle daemon (hypridle)
+# Notifications (mako), screen lock (hyprlock), idle daemon (hypridle), wallpaper (hyprpaper)
 { config, pkgs, lib, ... }:
 {
+  # Wallpaper: hyprpaper
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [ "${pkgs.hyprland}/share/hyprland/wall0.png" ];
+      wallpaper = [ ",${pkgs.hyprland}/share/hyprland/wall0.png" ];
+    };
+  };
   # Notifications: mako
   services.mako = {
     enable = true;

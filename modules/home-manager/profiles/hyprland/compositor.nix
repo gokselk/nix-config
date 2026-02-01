@@ -64,6 +64,11 @@
         preserve_split = true;
       };
 
+      # Misc settings
+      misc = {
+        disable_hyprland_logo = true;
+      };
+
       # Key bindings
       "$mod" = "SUPER";
       bind = [
