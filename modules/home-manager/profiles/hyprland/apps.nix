@@ -14,7 +14,15 @@
     cliphist
 
     # File manager
-    nautilus
+    yazi
+
+    # Viewers
+    zathura      # PDF/DJVU
+    imv          # Images
+
+    # Archive tools
+    p7zip
+    unrar
 
     # Audio control
     pavucontrol
@@ -34,7 +42,6 @@
     vscode-fhs
 
     # Media
-    vlc
     spotify
 
     # Communication

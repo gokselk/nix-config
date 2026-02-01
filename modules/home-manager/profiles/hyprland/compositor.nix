@@ -73,7 +73,7 @@
         "$mod, B, exec, brave"
         "$mod, W, killactive,"
         "$mod SHIFT, M, exit,"
-        "$mod, E, exec, nautilus"
+        "$mod, E, exec, ghostty -e yazi"
         "$mod, V, togglefloating,"
         "$mod, P, pseudo,"
         "$mod, S, togglesplit,"
