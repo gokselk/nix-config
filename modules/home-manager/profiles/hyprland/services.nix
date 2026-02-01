@@ -10,6 +10,34 @@
       wallpaper = [ ",${pkgs.hyprland}/share/hyprland/wall0.png" ];
     };
   };
+
+  # Clipboard history daemon
+  systemd.user.services.cliphist = {
+    Unit = {
+      Description = "Clipboard history daemon";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
+  # Polkit authentication agent
+  systemd.user.services.polkit-gnome = {
+    Unit = {
+      Description = "Polkit GNOME authentication agent";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
   # Notifications: mako
   services.mako = {
     enable = true;

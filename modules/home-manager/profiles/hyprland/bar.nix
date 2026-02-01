@@ -4,7 +4,7 @@
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = false;  # Started by Hyprland exec-once
+    systemd.enable = true;  # Managed by uwsm/systemd
     settings = {
       mainBar = {
         layer = "top";

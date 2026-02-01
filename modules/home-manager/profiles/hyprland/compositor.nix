@@ -169,14 +169,8 @@
         "$mod, mouse:273, resizewindow"
       ];
 
-      # Autostart
-      exec-once = [
-        "wl-paste --watch cliphist store"
-        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-        "waybar"
-        "mako"
-        "hypridle"
-      ];
+      # Autostart (most services managed by systemd via uwsm)
+      exec-once = [ ];
 
       # Environment variables for Wayland
       env = [
