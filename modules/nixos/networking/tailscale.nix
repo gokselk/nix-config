@@ -7,6 +7,8 @@
     useRoutingFeatures = "server";
     # Use authkey from sops-nix for automatic authentication
     authKeyFile = config.sops.secrets."tailscale/authkey".path;
+    # Advertise as exit node
+    extraUpFlags = [ "--advertise-exit-node" ];
   };
 
   # Required for Tailscale exit node functionality
