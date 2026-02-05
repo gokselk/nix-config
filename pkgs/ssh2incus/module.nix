@@ -13,7 +13,8 @@ let
   configAttrs = {
     listen = ":${toString cfg.port}";
     socket = cfg.socket;
-  } // cfg.settings;
+  }
+  // cfg.settings;
 
   configFile = settingsFormat.generate "config.yaml" configAttrs;
 in
@@ -80,7 +81,8 @@ in
         Restart = "on-failure";
         RestartSec = "3s";
         SupplementaryGroups = [ "incus-admin" ];
-      } // lib.optionalAttrs (cfg.user != null) { User = cfg.user; };
+      }
+      // lib.optionalAttrs (cfg.user != null) { User = cfg.user; };
     };
   };
 }
