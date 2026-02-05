@@ -41,7 +41,7 @@ in
       path = [ pkgs.coreutils pkgs.shadow ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.ssh2incus}/bin/ssh2incus -p ${toString cfg.port} -s /var/lib/incus/unix.socket ${lib.escapeShellArgs cfg.extraArgs}";
+        ExecStart = "${pkgs.ssh2incus}/bin/ssh2incus -l :${toString cfg.port} -s /var/lib/incus/unix.socket ${lib.escapeShellArgs cfg.extraArgs}";
         Restart = "on-failure";
         RestartSec = "3s";
         SupplementaryGroups = [ "incus-admin" ];
