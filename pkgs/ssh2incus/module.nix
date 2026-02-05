@@ -6,6 +6,12 @@
 }:
 let
   cfg = config.services.ssh2incus;
+
+  configFile = pkgs.writeText "ssh2incus-config.yaml" ''
+    listen: ":${toString cfg.port}"
+    socket: "/var/lib/incus/unix.socket"
+    ${lib.optionalString (cfg.settings != { }) (lib.generators.toYAML { } cfg.settings)}
+  '';
 in
 {
   options.services.ssh2incus = {
@@ -23,28 +29,34 @@ in
       description = "Open firewall port";
     };
 
-    extraArgs = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      example = [ "--password-auth" "--debug" ];
-      description = "Extra arguments to pass to ssh2incus";
+    settings = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+      example = {
+        groups = "incus,incus-admin";
+        debug = true;
+      };
+      description = "Additional settings for config.yaml";
     };
   };
 
   config = lib.mkIf cfg.enable {
+    environment.etc."ssh2incus/config.yaml".source = configFile;
+
     systemd.services.ssh2incus = {
       description = "SSH server for Incus instances";
       after = [ "network.target" "incus.service" ];
       requires = [ "incus.service" ];
       wantedBy = [ "multi-user.target" ];
 
-      path = [ pkgs.coreutils pkgs.shadow ];
+      path = [ pkgs.coreutils ];
 
       serviceConfig = {
-        ExecStart = "${pkgs.ssh2incus}/bin/ssh2incus -l :${toString cfg.port} -s /var/lib/incus/unix.socket ${lib.escapeShellArgs cfg.extraArgs}";
+        ExecStart = "${pkgs.ssh2incus}/bin/ssh2incus";
         Restart = "on-failure";
         RestartSec = "3s";
         SupplementaryGroups = [ "incus-admin" ];
+        WorkingDirectory = "/etc/ssh2incus";
       };
     };
 
