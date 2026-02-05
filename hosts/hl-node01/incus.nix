@@ -89,4 +89,10 @@
 
   # Incus CLI
   environment.systemPackages = [ pkgs.incus ];
+
+  # SSH server for Incus instances
+  services.ssh2incus = {
+    enable = true;
+    user = "goksel";
+  };
 }

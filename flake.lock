@@ -141,7 +141,8 @@
         "nix-darwin": "nix-darwin",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
-        "sops-nix": "sops-nix"
+        "sops-nix": "sops-nix",
+        "ssh2incus": "ssh2incus"
       }
     },
     "sops-nix": {
@@ -163,6 +164,22 @@
         "repo": "sops-nix",
         "type": "github"
       }
+    },
+    "ssh2incus": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "path": "./pkgs/ssh2incus",
+        "type": "path"
+      },
+      "original": {
+        "path": "./pkgs/ssh2incus",
+        "type": "path"
+      },
+      "parent": []
     }
   },
   "root": "root",

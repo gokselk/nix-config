@@ -40,6 +40,12 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # ssh2incus - SSH server for Incus instances
+    ssh2incus = {
+      url = "path:./pkgs/ssh2incus";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -52,6 +58,7 @@
       nixos-wsl,
       sops-nix,
       catppuccin,
+      ssh2incus,
       ...
     }@inputs:
     let
@@ -83,6 +90,7 @@
           modules = [
             disko.nixosModules.disko
             home-manager.nixosModules.home-manager
+            ssh2incus.nixosModules.default
             homeManagerConfig
             ./hosts/common
             ./hosts/${hostname}
