@@ -38,11 +38,12 @@ in
       requires = [ "incus.service" ];
       wantedBy = [ "multi-user.target" ];
 
+      path = [ pkgs.coreutils pkgs.shadow ];
+
       serviceConfig = {
         ExecStart = "${pkgs.ssh2incus}/bin/ssh2incus -p ${toString cfg.port} -s /var/lib/incus/unix.socket ${lib.escapeShellArgs cfg.extraArgs}";
         Restart = "on-failure";
         RestartSec = "3s";
-        # Run as root to access Incus socket
         SupplementaryGroups = [ "incus-admin" ];
       };
     };

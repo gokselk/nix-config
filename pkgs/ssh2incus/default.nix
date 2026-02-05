@@ -18,6 +18,11 @@ buildGoModule rec {
   vendorHash = "sha256-lJ1FckdxtlpI7AvlqgfVu4zWCaa7CADw/UheGCG4kws=";
   proxyVendor = true;
 
+  # NixOS doesn't have /usr/bin - use PATH lookup instead
+  postPatch = ''
+    substituteInPlace $(grep -rl '/usr/bin/id' .) --replace-warn '/usr/bin/id' 'id'
+  '';
+
   preBuild = ''
     ldflags+=" -X ssh2incus.builtAt=$(date -u -d @$SOURCE_DATE_EPOCH +%Y-%m-%dT%H:%M:%SZ)"
     for arch in amd64 arm64; do
