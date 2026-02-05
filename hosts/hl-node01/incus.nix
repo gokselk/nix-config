@@ -87,6 +87,9 @@
     "vmbr0"
   ];
 
-  # Incus CLI
-  environment.systemPackages = [ pkgs.incus ];
+  # Incus CLI and tools
+  environment.systemPackages = [
+    pkgs.incus
+    pkgs.ssh2incus
+  ];
 }
