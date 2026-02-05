@@ -15,7 +15,8 @@ buildGoModule rec {
     hash = "sha256-4VgxLp+2lIrHshfQ4DwSJ6ykssL75XN4dBmF57PMPfM=";
   };
 
-  vendorHash = "sha256-70D3Hz6AKO/eGJsZnLPEYh+K0/C0g1s/aKuGTYjdcoE=";
+  vendorHash = "sha256-lJ1FckdxtlpI7AvlqgfVu4zWCaa7CADw/UheGCG4kws=";
+  proxyVendor = true;
 
   preBuild = ''
     ldflags+=" -X ssh2incus.builtAt=$(date -u -d @$SOURCE_DATE_EPOCH +%Y-%m-%dT%H:%M:%SZ)"
