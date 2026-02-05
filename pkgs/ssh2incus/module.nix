@@ -29,6 +29,12 @@ in
       description = "Open firewall port";
     };
 
+    user = lib.mkOption {
+      type = lib.types.nullOr lib.types.str;
+      default = null;
+      description = "User to run as (uses their ~/.ssh/authorized_keys for auth)";
+    };
+
     settings = lib.mkOption {
       type = lib.types.attrs;
       default = { };
@@ -57,6 +63,8 @@ in
         RestartSec = "3s";
         SupplementaryGroups = [ "incus-admin" ];
         WorkingDirectory = "/etc/ssh2incus";
+      } // lib.optionalAttrs (cfg.user != null) {
+        User = cfg.user;
       };
     };
 
