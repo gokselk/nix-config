@@ -47,7 +47,14 @@
   system.stateVersion = "24.11";
 
   # Add Hyprland home-manager profile
-  home-manager.users.goksel.imports = [
-    ../../modules/home-manager/profiles/hyprland
-  ];
+  home-manager.users.goksel = {
+    imports = [
+      ../../modules/home-manager/profiles/hyprland
+    ];
+
+    # ssh2incus reads ~/.ssh/authorized_keys for host auth
+    home.file.".ssh/authorized_keys" = {
+      text = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHTkE/L8j4Awh0xfi38iz9oDKPX7Z+ZDOku6LcBh3tY gokselk.dev@gmail.com\n";
+    };
+  };
 }
