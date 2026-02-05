@@ -92,8 +92,6 @@
   environment.systemPackages = [ pkgs.incus ];
 
   # SSH access to Incus instances
-  services.ssh2incus = {
-    enable = true;
-    user = "goksel";
-  };
+  services.ssh2incus.enable = true;
+
 }

@@ -13,6 +13,7 @@
     extraGroups = [
       "wheel" # sudo access
       "networkmanager"
+      "incus" # Incus access
       "incus-admin" # Incus container management
     ];
     openssh.authorizedKeys.keys = [
