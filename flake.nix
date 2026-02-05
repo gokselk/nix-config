@@ -55,11 +55,6 @@
       ...
     }@inputs:
     let
-      # Overlay for custom packages
-      customPackagesOverlay = final: prev: {
-        ssh2incus = final.callPackage ./pkgs/ssh2incus { };
-      };
-
       # Common home-manager settings
       homeManagerConfig = {
         home-manager.useGlobalPkgs = true;
@@ -86,7 +81,6 @@
             inherit (self) outputs;
           };
           modules = [
-            { nixpkgs.overlays = [ customPackagesOverlay ]; }
             disko.nixosModules.disko
             home-manager.nixosModules.home-manager
             homeManagerConfig
@@ -128,17 +122,6 @@
       ];
     in
     {
-      # Custom packages
-      packages = forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        {
-          ssh2incus = pkgs.callPackage ./pkgs/ssh2incus { };
-        }
-      );
-
       # Formatter for `nix fmt`
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
 

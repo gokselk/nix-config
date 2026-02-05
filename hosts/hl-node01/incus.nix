@@ -6,7 +6,6 @@
   ...
 }:
 {
-  imports = [ ../../pkgs/ssh2incus/module.nix ];
   virtualisation.incus = {
     enable = true;
 
@@ -90,8 +89,4 @@
 
   # Incus CLI
   environment.systemPackages = [ pkgs.incus ];
-
-  # SSH access to Incus instances
-  services.ssh2incus.enable = true;
-
 }
