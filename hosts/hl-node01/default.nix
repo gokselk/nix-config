@@ -14,6 +14,7 @@
     ./hardware.nix
     ./networking.nix
     ./incus.nix
+    ./k3s.nix
 
     # Common modules
     ../../modules/nixos/core
