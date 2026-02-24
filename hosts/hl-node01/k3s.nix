@@ -5,8 +5,8 @@
     enable = true;
     role = "server";
     extraFlags = toString [
-      "--disable=traefik"       # Install ingress yourself via Helm/Flux
-      "--disable=servicelb"     # Use MetalLB or similar instead
+      "--disable=traefik" # Install ingress yourself via Helm/Flux
+      "--disable=servicelb" # Use MetalLB or similar instead
     ];
   };
 

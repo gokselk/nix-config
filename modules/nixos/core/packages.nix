@@ -20,6 +20,7 @@
     tcpdump
 
     # Hardware diagnostics
+    dmidecode
     pciutils
     usbutils
     lsof
