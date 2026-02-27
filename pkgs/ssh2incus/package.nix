@@ -4,7 +4,7 @@
   fetchFromGitHub,
 }:
 let
-  version = "0.9";
+  version = "0.10";
 in
 buildGoModule {
   pname = "ssh2incus";
@@ -14,10 +14,10 @@ buildGoModule {
     owner = "mobydeck";
     repo = "ssh2incus";
     rev = version;
-    hash = "sha256-4VgxLp+2lIrHshfQ4DwSJ6ykssL75XN4dBmF57PMPfM=";
+    hash = "sha256-okYakGF+zADhszKGmsiItNKw4hkZwXeU6w5eqgwMk+E=";
   };
 
-  vendorHash = "sha256-lJ1FckdxtlpI7AvlqgfVu4zWCaa7CADw/UheGCG4kws=";
+  vendorHash = "sha256-csegMIRjq1thUXDAmEd3DQlZL0cb+gklySZSveL0J1c=";
   proxyVendor = true;
 
   subPackages = [ "cmd/ssh2incus" ];
@@ -29,9 +29,11 @@ buildGoModule {
     "-X ssh2incus.builtAt=1970-01-01T00:00:00Z"
   ];
 
+  # Web UI frontend source is closed-source and not in the public repo.
+  # Placeholder satisfies the go:embed directive in web/embed.go.
   postPatch = ''
-    substituteInPlace pkg/user/id.go \
-      --replace-fail '/usr/bin/id' 'id'
+    mkdir -p web/dist
+    echo '<!doctype html>' > web/dist/index.html
   '';
 
   preBuild = ''
