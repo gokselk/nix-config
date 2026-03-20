@@ -47,6 +47,11 @@
   # System state version (do not change after install)
   system.stateVersion = "24.11";
 
+  # code-on-incus: AI coding agents in isolated Incus containers
+  environment.systemPackages = [
+    (pkgs.callPackage ../../pkgs/coi/package.nix { })
+  ];
+
   # Add Hyprland home-manager profile
   home-manager.users.goksel = {
     imports = [
