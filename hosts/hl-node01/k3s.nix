@@ -10,11 +10,6 @@
     ];
   };
 
-  # Firewall: K3s API server
-  networking.firewall.allowedTCPPorts = [
-    6443 # Kubernetes API
-  ];
-
   # CLI tools
   environment.systemPackages = with pkgs; [
     kubectl

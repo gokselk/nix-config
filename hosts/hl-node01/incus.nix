@@ -78,15 +78,6 @@
     };
   };
 
-  # Required for Incus networking
-  networking.nftables.enable = true;
-
-  # Firewall rules for bridges
-  networking.firewall.trustedInterfaces = [
-    "incusbr0"
-    "vmbr0"
-  ];
-
   # Incus CLI
   environment.systemPackages = [ pkgs.incus ];
 
