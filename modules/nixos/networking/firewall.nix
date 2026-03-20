@@ -24,11 +24,11 @@
         services = [ "ssh" ];
         ports = [
           {
-            port = "41641";
+            port = 41641;
             protocol = "udp";
           } # Tailscale
           {
-            port = "6443";
+            port = 6443;
             protocol = "tcp";
           } # K3s API
         ];
