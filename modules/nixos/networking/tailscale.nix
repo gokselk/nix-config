@@ -7,8 +7,11 @@
     useRoutingFeatures = "server";
     # Use authkey from sops-nix for automatic authentication
     authKeyFile = config.sops.secrets."tailscale/authkey".path;
-    # Advertise as exit node
-    extraUpFlags = [ "--advertise-exit-node" ];
+    # Advertise as exit node and subnet router for Incus NAT network
+    extraUpFlags = [
+      "--advertise-exit-node"
+      "--advertise-routes=10.10.10.0/24"
+    ];
   };
 
   # Required for Tailscale exit node functionality
