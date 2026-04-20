@@ -6,7 +6,7 @@
   systemdLibs,
 }:
 let
-  version = "0.7.0";
+  version = "0.8.0";
 in
 buildGoModule {
   pname = "coi";
@@ -16,20 +16,21 @@ buildGoModule {
     owner = "mensfeld";
     repo = "code-on-incus";
     rev = "v${version}";
-    hash = "sha256-hTQFmOPoEfxeREC2IL6R3zUtNZwTx83pc2bN1mt0kfI=";
+    hash = "sha256-05i/5M8u2f04/6dhVxHPRn0rF1ZJ/pQEI4xY+selutU=";
   };
 
-  vendorHash = "sha256-YagzBcH9b0Xc/ULglvwmeX4EemvQz9ZC2xGKrK85E2Q=";
+  vendorHash = "sha256-HSobQDo0P9e6oCMv/VOjsRQVJFnX7zd1oqsiVEsGf90=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ systemdLibs ];
 
   subPackages = [ "cmd/coi" ];
 
-  # COI embeds the container build script and a test dummy into the binary
+  # COI embeds the container build script, default config, and a test dummy into the binary
   preBuild = ''
-    mkdir -p internal/image/embedded
-    cp scripts/build/coi.sh internal/image/embedded/coi_build.sh
+    mkdir -p internal/image/embedded internal/config/embedded
+    cp profiles/default/build.sh internal/image/embedded/coi_build.sh
+    cp profiles/default/config.toml internal/config/embedded/default_config.toml
     cp testdata/dummy/dummy internal/image/embedded/dummy
   '';
 
