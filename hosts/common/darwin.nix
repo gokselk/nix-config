@@ -14,10 +14,13 @@
   networking.localHostName = config.networking.hostName;
 
   # Security - Touch ID for sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # System version
   system.stateVersion = 4;
+
+  # Primary user for user-scoped system defaults and homebrew
+  system.primaryUser = "goksel";
 
   # User configuration
   users.users.goksel = {
