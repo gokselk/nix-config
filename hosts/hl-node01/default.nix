@@ -43,7 +43,7 @@
   networking.hostId = "962c5737";
 
   # System state version (do not change after install)
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # code-on-incus: AI coding agents in isolated Incus containers
   environment.systemPackages = [
