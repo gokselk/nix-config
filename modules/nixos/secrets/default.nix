@@ -22,6 +22,10 @@
     # Define secrets to decrypt
     secrets = {
       "tailscale/authkey" = { };
+      "users/goksel/hashedPassword" = {
+        # Decrypt before users.users runs so hashedPasswordFile resolves
+        neededForUsers = true;
+      };
     };
   };
 }

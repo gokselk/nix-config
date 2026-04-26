@@ -19,10 +19,10 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHTkE/L8j4Awh0xfi38iz9oDKPX7Z+ZDOku6LcBh3tY goksel@users.noreply.github.com"
     ];
-    # Allow passwordless sudo for wheel group
-    # Password will be set on first login
-    initialPassword = "changeme";
+    hashedPasswordFile = config.sops.secrets."users/goksel/hashedPassword".path;
   };
+
+  users.mutableUsers = false;
 
   # Security: Allow wheel group to use sudo without password
   security.sudo.wheelNeedsPassword = false;
