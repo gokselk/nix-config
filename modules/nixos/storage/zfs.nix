@@ -29,6 +29,25 @@ in
   # Note: This might change as kernels are added or removed
   boot.kernelPackages = latestKernelPackage;
 
+  # Erase Your Darlings: roll / and /var back to @blank in stage 1 on every boot.
+  # State that should survive lives under /persist, bind-mounted by impermanence.
+  boot.initrd.systemd.enable = true;
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback ZFS root and var to a pristine state";
+    wantedBy = [ "initrd.target" ];
+    after = [ "zfs-import-rpool.service" ];
+    before = [ "sysroot.mount" ];
+    unitConfig.DefaultDependencies = false;
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      zfs rollback -r rpool/system/root@blank
+      zfs rollback -r rpool/system/var@blank
+    '';
+  };
+
   # Automatic snapshots with zfs-auto-snapshot
   services.zfs.autoSnapshot = {
     enable = true;

@@ -163,13 +163,13 @@ install host target:
 
     tmp=$(mktemp -d)
     trap 'rm -rf "$tmp"' EXIT
-    mkdir -p "$tmp/etc/ssh"
+    mkdir -p "$tmp/persist/etc/ssh"
 
     just _info "Generating host SSH key for {{host}}"
     ssh-keygen -t ed25519 -N "" -C "root@{{host}}" \
-        -f "$tmp/etc/ssh/ssh_host_ed25519_key" >/dev/null
+        -f "$tmp/persist/etc/ssh/ssh_host_ed25519_key" >/dev/null
 
-    age_pub=$(nix run nixpkgs#ssh-to-age -- < "$tmp/etc/ssh/ssh_host_ed25519_key.pub")
+    age_pub=$(nix run nixpkgs#ssh-to-age -- < "$tmp/persist/etc/ssh/ssh_host_ed25519_key.pub")
     just _info "Host age key: $age_pub"
 
     current=$(awk -v h="&{{host}}" '$0 ~ "- " h {print $3}' .sops.yaml || true)

@@ -34,6 +34,13 @@
       url = "path:./pkgs/ssh2incus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Ephemeral root: explicit persist list, everything else rolled back on boot
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs =
@@ -77,6 +84,7 @@
             disko.nixosModules.disko
             home-manager.nixosModules.home-manager
             ssh2incus.nixosModules.default
+            inputs.impermanence.nixosModules.impermanence
             homeManagerConfig
             ./hosts/common
             ./hosts/${hostname}

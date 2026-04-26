@@ -81,17 +81,21 @@
             type = "zfs_fs";
             options.mountpoint = "none";
           };
+          # Both / and /var roll back to @blank on every boot via
+          # the systemd-initrd rollback unit in modules/nixos/storage/zfs.nix.
+          # Auto-snapshot is off because zfs rollback -r destroys any later
+          # snapshots — keeping them on would just create churn.
           "system/root" = {
             type = "zfs_fs";
             mountpoint = "/";
-            options."com.sun:auto-snapshot" = "true";
-            # Create blank snapshot for potential impermanence setup
+            options."com.sun:auto-snapshot" = "false";
             postCreateHook = "zfs snapshot rpool/system/root@blank";
           };
           "system/var" = {
             type = "zfs_fs";
             mountpoint = "/var";
-            options."com.sun:auto-snapshot" = "true";
+            options."com.sun:auto-snapshot" = "false";
+            postCreateHook = "zfs snapshot rpool/system/var@blank";
           };
 
           # USER: User data (most important for backups)
