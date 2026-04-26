@@ -8,10 +8,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # NixOS rebuild (current host)
 just rebuild
 
-# Darwin/macOS rebuild (current host)
-just darwin
-just darwin-bootstrap <host>  # First-time nix-darwin install
-
 # Update flake inputs
 just update
 
@@ -30,21 +26,19 @@ just gc                       # Garbage collect old generations
 just deploy <host>            # Deploy to remote host via SSH
 
 # Install (ERASES DISK)
-just install <hostname> <target-host>  # nixos-anywhere install
+just install <hostname> <target-host>  # nixos-anywhere install with pre-seeded host key
 ```
 
 ## Architecture
 
-Single flake with unified home-manager as NixOS/Darwin module.
+Single-host NixOS flake with home-manager as a NixOS module.
 
 ### Hosts
 
 - `nixosConfigurations.hl-node01` - Headless Incus server (AMD Ryzen 6800H)
-- `nixosConfigurations.gk-desktop-wsl` - WSL instance with dev tools
-- `darwinConfigurations.gk-air` - MacBook Air M2
 
 Host entry: `hosts/<hostname>/default.nix`
-Common config: `hosts/common/` (NixOS: `default.nix`, Darwin: `darwin.nix`)
+Common config: `hosts/common/`
 
 ### Modules
 
@@ -56,12 +50,8 @@ modules/
 │   ├── storage/     # ZFS
 │   ├── secrets/     # SOPS-nix
 │   └── desktop/     # GNOME, Hyprland, KDE (optional)
-├── darwin/          # macOS modules
-│   ├── core/        # nix, packages
-│   ├── system/      # defaults, dock, finder
-│   └── homebrew/    # casks, formulae, mas
 └── home-manager/    # Home-manager profiles
-    ├── profiles/    # Composable (core, shell, cli, development, darwin, gnome...)
+    ├── profiles/    # Composable (core, shell, cli, development, gnome, hyprland, kde)
     └── users/       # User-specific config
 ```
 
@@ -75,8 +65,16 @@ secrets/
 
 SOPS rules in `.sops.yaml`. SSH host key converts to age key for decryption.
 
+The user's password is stored as a hashed secret at `users/goksel/hashedPassword`
+in `secrets/hosts/common/secrets.yaml`, decrypted with `neededForUsers = true`
+so it's available before user creation. There is no plaintext default password.
+
+The fresh-install bootstrap pre-seeds `/etc/ssh/ssh_host_ed25519_key` via
+`nixos-anywhere --extra-files` so sops-nix can decrypt on the very first
+activation. See `just install` for the flow.
+
 ## Key Patterns
 
-- `mkHost` / `mkDarwin` helpers in `flake.nix` create system configs
-- Home-manager profiles imported via `hosts/common/users.nix` (NixOS) or `hosts/common/darwin.nix`
+- `mkHost` helper in `flake.nix` creates the system config
+- Home-manager profiles imported via `hosts/common/users.nix`
 - Per-host home-manager additions in host's `default.nix`

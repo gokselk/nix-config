@@ -17,18 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nix-darwin for macOS
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # WSL support
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -54,8 +42,6 @@
       nixpkgs,
       disko,
       home-manager,
-      nix-darwin,
-      nixos-wsl,
       sops-nix,
       catppuccin,
       ssh2incus,
@@ -98,36 +84,7 @@
           ++ extraModules;
         };
 
-      # Helper function to create Darwin (macOS) configurations
-      mkDarwin =
-        {
-          hostname,
-          system ? "aarch64-darwin",
-          extraModules ? [ ],
-        }:
-        nix-darwin.lib.darwinSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs;
-            inherit (self) outputs;
-          };
-          modules = [
-            home-manager.darwinModules.home-manager
-            homeManagerConfig
-            ./hosts/common/darwin.nix
-            ./modules/darwin/core
-            ./modules/darwin/system
-            ./modules/darwin/homebrew
-            ./hosts/${hostname}
-          ]
-          ++ extraModules;
-        };
-      # Systems to generate formatters for
-      forAllSystems = nixpkgs.lib.genAttrs [
-        "x86_64-linux"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
+      forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" ];
     in
     {
       # Formatter for `nix fmt`
@@ -138,21 +95,6 @@
         hl-node01 = mkHost {
           hostname = "hl-node01";
           system = "x86_64-linux";
-        };
-
-        # WSL instance on Windows desktop
-        gk-desktop-wsl = mkHost {
-          hostname = "gk-desktop-wsl";
-          system = "x86_64-linux";
-          extraModules = [ nixos-wsl.nixosModules.wsl ];
-        };
-      };
-
-      darwinConfigurations = {
-        # Personal MacBook Air M2
-        gk-air = mkDarwin {
-          hostname = "gk-air";
-          system = "aarch64-darwin";
         };
       };
     };
