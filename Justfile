@@ -153,44 +153,7 @@ deploy host:
 [doc('Install NixOS on remote host (ERASES DISK)')]
 [confirm('This will ERASE ALL DATA on the target disk. Continue?')]
 install host target:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    if [[ ! -d "hosts/{{host}}" ]]; then
-        echo "Error: Host '{{host}}' not found"
-        echo "Available: $(ls -1 hosts/ | grep -v common | tr '\n' ' ')"
-        exit 1
-    fi
-
-    tmp=$(mktemp -d)
-    trap 'rm -rf "$tmp"' EXIT
-    mkdir -p "$tmp/persist/etc/ssh"
-
-    just _info "Generating host SSH key for {{host}}"
-    ssh-keygen -t ed25519 -N "" -C "root@{{host}}" \
-        -f "$tmp/persist/etc/ssh/ssh_host_ed25519_key" >/dev/null
-
-    age_pub=$(nix run nixpkgs#ssh-to-age -- < "$tmp/persist/etc/ssh/ssh_host_ed25519_key.pub")
-    just _info "Host age key: $age_pub"
-
-    current=$(awk -v h="&{{host}}" '$0 ~ "- " h {print $3}' .sops.yaml || true)
-    if [[ "$current" != "$age_pub" ]]; then
-        just _warn "Update .sops.yaml: replace &{{host}} with $age_pub"
-        just _warn "Then run: just secrets-rekey"
-        echo "Press enter once .sops.yaml is updated and rekeyed to continue install..."
-        read -r
-    fi
-
-    just _info "Installing {{host}} to {{target}}"
-    nix run github:nix-community/nixos-anywhere -- \
-        --flake .#{{host}} \
-        --target-host {{target}} \
-        --extra-files "$tmp" \
-        --build-on remote
-
-    echo ""
-    echo "Done! Host key was pre-seeded; sops decrypted on first activation."
-    echo "Next: ssh goksel@{{target}}  (password from secrets.yaml)"
-    echo "Don't forget to commit + push .sops.yaml and secrets/hosts/common/secrets.yaml"
+    @scripts/install.sh {{host}} {{target}}
 
 # ─── ZFS ─────────────────────────────────────────
 
