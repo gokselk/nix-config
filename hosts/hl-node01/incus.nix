@@ -9,6 +9,10 @@
   virtualisation.incus = {
     enable = true;
 
+    # Upstream made this option null-default for stateVersion < 26.11 to force
+    # an explicit opt-out from the unmaintained minio S3 backend.
+    bucketSupport = false;
+
     # Declarative preseed configuration
     preseed = {
       networks = [
