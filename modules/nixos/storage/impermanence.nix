@@ -9,7 +9,6 @@
     hideMounts = true;
 
     directories = [
-      "/etc/ssh"
       "/var/lib/nixos"
       "/var/lib/systemd"
       "/var/log"
@@ -22,8 +21,21 @@
     ];
   };
 
-  # Read sops host age key directly from /persist to avoid any timing
-  # dependency on etc-ssh.mount being up before sops decryption runs.
+  # Point sshd at /persist directly instead of bind-mounting /etc/ssh.
+  # Binding the directory hides the nix-managed /etc/ssh/sshd_config; reading
+  # keys from /persist preserves both sshd_config and key persistence.
+  services.openssh.hostKeys = [
+    {
+      path = "/persist/etc/ssh/ssh_host_ed25519_key";
+      type = "ed25519";
+    }
+    {
+      path = "/persist/etc/ssh/ssh_host_rsa_key";
+      type = "rsa";
+      bits = 4096;
+    }
+  ];
+
   sops.age.sshKeyPaths = lib.mkForce [
     "/persist/etc/ssh/ssh_host_ed25519_key"
   ];
