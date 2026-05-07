@@ -144,10 +144,14 @@ host-key host="hl-node01":
 # ─── Deploy ───────────────────────────────────────
 
 [group('deploy')]
-[doc('Deploy to remote host via SSH')]
-deploy host:
-    @just _info "Deploying to {{host}}"
-    nixos-rebuild switch --flake .#{{host}} --target-host {{host}} --use-remote-sudo
+[doc('Deploy to remote host via SSH (target defaults to host)')]
+deploy host target=host:
+    @just _info "Deploying {{host}} to {{target}}"
+    nix run nixpkgs#nixos-rebuild -- switch \
+        --flake .#{{host}} \
+        --target-host {{target}} \
+        --build-host {{target}} \
+        --sudo
 
 [group('deploy')]
 [doc('Install NixOS on remote host (ERASES DISK)')]
