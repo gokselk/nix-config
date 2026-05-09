@@ -31,6 +31,10 @@
             port = 6443;
             protocol = "tcp";
           } # K3s API
+          {
+            port = 8443;
+            protocol = "tcp";
+          } # Incus web UI / API
         ];
       };
 

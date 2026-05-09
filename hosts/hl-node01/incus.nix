@@ -8,6 +8,7 @@
 {
   virtualisation.incus = {
     enable = true;
+    ui.enable = true;
 
     # Upstream made this option null-default for stateVersion < 26.11 to force
     # an explicit opt-out from the unmaintained minio S3 backend.
@@ -15,6 +16,10 @@
 
     # Declarative preseed configuration
     preseed = {
+      config = {
+        "core.https_address" = ":8443";
+      };
+
       networks = [
         # NAT network - isolated, 10.10.10.x range
         {
